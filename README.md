@@ -100,14 +100,14 @@ I'm a passionate Frontend Developer with a strong foundation in Computer Systems
   <img width="48%" src="https://github-readme-streak-stats.herokuapp.com/?user=obadadeg&theme=tokyonight" alt="GitHub streak stats" />
 </div> -->
 
-## 🌟 Featured Projects
+<!-- ## 🌟 Featured Projects
 
 <div align="center">
 <a href="#"><img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=obadadeg&repo=your-repo-name&theme=tokyonight" /></a>
 
 </div>
 
-<div align="center">
+<div align="center"> -->
 
 ## 🤝 Let's Connect
 
