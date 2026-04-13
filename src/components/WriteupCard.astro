@@ -1,0 +1,97 @@
+---
+import TagPill from './TagPill.astro';
+
+interface Props {
+  title: string;
+  ctf: string;
+  category: string;
+  difficulty: string;
+  date: Date;
+  slug: string;
+}
+
+const { title, ctf, category, difficulty, date, slug } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+const difficultyColor: Record<string, string> = {
+  Easy: '#4ade80',
+  Medium: '#facc15',
+  Hard: '#f87171',
+};
+---
+
+<article class="writeup-card">
+  <div class="card-main">
+    <a href={`/writeups/${slug}`} class="card-title">{title}</a>
+    <span class="card-ctf">{ctf}</span>
+  </div>
+
+  <div class="card-meta">
+    <TagPill label={category} href={`/writeups/category/${category.toLowerCase()}`} />
+    <span
+      class="difficulty-pill"
+      style={`color: ${difficultyColor[difficulty] ?? 'var(--color-muted)'};`}
+    >
+      {difficulty}
+    </span>
+    <span class="card-date">{formattedDate}</span>
+  </div>
+</article>
+
+<style>
+  .writeup-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+  }
+
+  .card-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: color 0.15s ease;
+  }
+
+  .card-title:hover {
+    color: var(--color-accent);
+  }
+
+  .card-ctf {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .difficulty-pill {
+    font-size: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .card-date {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+</style>

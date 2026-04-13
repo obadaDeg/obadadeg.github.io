@@ -1,0 +1,78 @@
+---
+import Page from '@layouts/Page.astro';
+import WriteupCard from '@components/WriteupCard.astro';
+import TagPill from '@components/TagPill.astro';
+import { getCollection } from 'astro:content';
+
+const allWriteups = await getCollection('writeups');
+const writeups = allWriteups.sort((a, b) =>
+  b.data.date.getTime() - a.data.date.getTime()
+);
+
+const categories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
+---
+
+<Page title="CTF Writeups" description="CTF challenge writeups by Obada Daghlas — web, pwn, crypto, and more.">
+  <section>
+    <h1 class="page-title">CTF Writeups</h1>
+    <p class="page-sub">
+      Technical writeups from CTF competitions and security challenges.
+    </p>
+
+    <!-- Category filter -->
+    <div class="category-filter">
+      {categories.map(cat => (
+        <TagPill label={cat} href={`/writeups/category/${cat.toLowerCase()}`} />
+      ))}
+    </div>
+
+    <!-- Writeup list -->
+    {writeups.length > 0 ? (
+      <div class="writeup-list">
+        {writeups.map(w => (
+          <WriteupCard
+            title={w.data.title}
+            ctf={w.data.ctf}
+            category={w.data.category}
+            difficulty={w.data.difficulty}
+            date={w.data.date}
+            slug={w.slug}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No writeups yet — check back soon.</p>
+    )}
+  </section>
+</Page>
+
+<style>
+  .page-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-sub {
+    color: var(--color-muted);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .writeup-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    font-style: italic;
+    margin-top: 2rem;
+  }
+</style>

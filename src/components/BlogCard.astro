@@ -1,0 +1,83 @@
+---
+import TagPill from './TagPill.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  tags: string[];
+  excerpt: string;
+  slug: string;
+}
+
+const { title, date, tags, excerpt, slug } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<article class="blog-card">
+  <div class="card-top">
+    <a href={`/blog/${slug}`} class="card-title">{title}</a>
+    <span class="card-date">{formattedDate}</span>
+  </div>
+
+  <p class="card-excerpt">{excerpt}</p>
+
+  {tags.length > 0 && (
+    <div class="card-tags">
+      {tags.map(tag => <TagPill label={tag} />)}
+    </div>
+  )}
+</article>
+
+<style>
+  .blog-card {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: color 0.15s ease;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .card-title:hover {
+    color: var(--color-accent);
+  }
+
+  .card-date {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-excerpt {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+</style>

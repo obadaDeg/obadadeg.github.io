@@ -1,0 +1,111 @@
+---
+import TagPill from './TagPill.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  tech: string[];
+  github: string;
+  demo?: string;
+  featured?: boolean;
+}
+
+const { title, description, tech, github, demo, featured = false } = Astro.props;
+---
+
+<article class="project-card">
+  <div class="card-header">
+    <h3 class="card-title">{title}</h3>
+    {featured && <span class="featured-badge">Featured</span>}
+  </div>
+
+  <p class="card-description">{description}</p>
+
+  <div class="card-tech">
+    {tech.map(t => <TagPill label={t} />)}
+  </div>
+
+  <div class="card-links">
+    <a href={github} target="_blank" rel="noopener noreferrer" class="card-link">
+      ↗ GitHub
+    </a>
+    {demo && (
+      <a href={demo} target="_blank" rel="noopener noreferrer" class="card-link">
+        ↗ Demo
+      </a>
+    )}
+  </div>
+</article>
+
+<style>
+  .project-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .featured-badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    background: var(--color-accent-dim);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-description {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .card-link {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    transition: color 0.15s ease;
+  }
+
+  .card-link:hover {
+    color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import Page from '@layouts/Page.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) =>
+  b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<Page title="Projects">
+  <section>
+    <h1 class="page-title">Projects</h1>
+    <p class="page-sub">
+      A selection of things I've built — backend services, APIs, and tools.
+    </p>
+
+    <div class="projects-grid">
+      {projects.map(project => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          tech={project.data.tech}
+          github={project.data.github}
+          demo={project.data.demo}
+          featured={project.data.featured}
+        />
+      ))}
+    </div>
+
+    {projects.length === 0 && (
+      <p class="empty-state">No projects yet — check back soon.</p>
+    )}
+  </section>
+</Page>
+
+<style>
+  .page-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-sub {
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    font-style: italic;
+  }
+</style>
