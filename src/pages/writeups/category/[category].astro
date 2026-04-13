@@ -1,0 +1,104 @@
+---
+import Page from '@layouts/Page.astro';
+import WriteupCard from '@components/WriteupCard.astro';
+import TagPill from '@components/TagPill.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const categories = ['web', 'pwn', 'crypto', 'forensics', 'misc', 'osint'];
+  const allWriteups = await getCollection('writeups');
+
+  return categories.map(cat => ({
+    params: { category: cat },
+    props: {
+      category: cat,
+      writeups: allWriteups
+        .filter(w => w.data.category.toLowerCase() === cat)
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    },
+  }));
+}
+
+const { category, writeups } = Astro.props;
+const displayCategory = category.charAt(0).toUpperCase() + category.slice(1);
+const allCategories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
+---
+
+<Page
+  title={`${displayCategory} Writeups`}
+  description={`CTF writeups in the ${displayCategory} category by Obada Daghlas.`}
+>
+  <section>
+    <div class="page-header">
+      <a href="/writeups" class="back-link">← All Writeups</a>
+      <h1 class="page-title">{displayCategory} Writeups</h1>
+    </div>
+
+    <!-- Category filter (all categories) -->
+    <div class="category-filter">
+      {allCategories.map(cat => (
+        <TagPill
+          label={cat}
+          href={`/writeups/category/${cat.toLowerCase()}`}
+        />
+      ))}
+    </div>
+
+    {writeups.length > 0 ? (
+      <div class="writeup-list">
+        {writeups.map(w => (
+          <WriteupCard
+            title={w.data.title}
+            ctf={w.data.ctf}
+            category={w.data.category}
+            difficulty={w.data.difficulty}
+            date={w.data.date}
+            slug={w.slug}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No {displayCategory} writeups yet — check back soon.</p>
+    )}
+  </section>
+</Page>
+
+<style>
+  .page-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-bottom: 1rem;
+    transition: color 0.15s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .writeup-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    font-style: italic;
+    margin-top: 2rem;
+  }
+</style>

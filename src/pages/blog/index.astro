@@ -1,0 +1,58 @@
+---
+import Page from '@layouts/Page.astro';
+import BlogCard from '@components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) =>
+  b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<Page title="Blog" description="Technical writing by Obada Daghlas on security, development, and infrastructure.">
+  <section>
+    <h1 class="page-title">Blog</h1>
+    <p class="page-sub">
+      Technical writing on security, development, and infrastructure.
+    </p>
+
+    {posts.length > 0 ? (
+      <div class="post-list">
+        {posts.map(post => (
+          <BlogCard
+            title={post.data.title}
+            date={post.data.date}
+            tags={post.data.tags}
+            excerpt={post.data.excerpt}
+            slug={post.slug}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No posts yet — check back soon.</p>
+    )}
+  </section>
+</Page>
+
+<style>
+  .page-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-sub {
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    font-style: italic;
+  }
+</style>

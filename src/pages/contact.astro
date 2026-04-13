@@ -1,0 +1,123 @@
+---
+import Page from '@layouts/Page.astro';
+---
+
+<Page
+  title="Contact"
+  description="Get in touch with Obada Daghlas — software engineer and security researcher."
+>
+  <section class="contact-section">
+    <h1 class="page-title">Contact</h1>
+    <p class="intro">
+      I'm open to internship opportunities, collaborations, and interesting conversations.
+      Feel free to reach out.
+    </p>
+
+    <div class="contact-links">
+      <div class="contact-item">
+        <span class="contact-label">GitHub</span>
+        <a
+          href="https://github.com/obadaDeg"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-value"
+        >
+          github.com/obadaDeg ↗
+        </a>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <a href="mailto:obada.daghlas.dev@gmail.com" class="contact-value">
+          obada.daghlas.dev@gmail.com
+        </a>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-label">LinkedIn</span>
+        <a
+          href="https://linkedin.com/in/obadadaghlas"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-value"
+        >
+          linkedin.com/in/obadadaghlas ↗
+        </a>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-label">Resume</span>
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-value"
+        >
+          View PDF ↗
+        </a>
+      </div>
+    </div>
+
+    <p class="ctf-note">
+      For CTF collaboration or security research, GitHub is the best place to reach me.
+    </p>
+  </section>
+</Page>
+
+<style>
+  .page-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro {
+    color: var(--color-muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    font-size: 0.9rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.25rem;
+  }
+
+  .contact-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    transition: color 0.15s ease;
+  }
+
+  .contact-value:hover {
+    color: var(--color-accent);
+  }
+
+  .ctf-note {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1rem;
+  }
+</style>

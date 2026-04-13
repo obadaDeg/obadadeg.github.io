@@ -1,0 +1,124 @@
+---
+import Post from '@layouts/Post.astro';
+import TagPill from '@components/TagPill.astro';
+import CopyButton from '@components/CopyButton.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const writeups = await getCollection('writeups');
+  return writeups.map(w => ({
+    params: { slug: w.slug },
+    props: { writeup: w },
+  }));
+}
+
+const { writeup } = Astro.props;
+const { Content, headings } = await writeup.render();
+
+const formattedDate = writeup.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const difficultyColor: Record<string, string> = {
+  Easy: '#4ade80',
+  Medium: '#facc15',
+  Hard: '#f87171',
+};
+---
+
+<Post
+  title={writeup.data.title}
+  description={writeup.data.excerpt}
+  headings={headings}
+  backLabel="← All Writeups"
+  backHref="/writeups"
+>
+  <!-- Metadata header -->
+  <div class="meta-header">
+    <h1 class="writeup-title">{writeup.data.title}</h1>
+    <div class="meta-row">
+      <span class="meta-ctf">{writeup.data.ctf}</span>
+      <TagPill
+        label={writeup.data.category}
+        href={`/writeups/category/${writeup.data.category.toLowerCase()}`}
+      />
+      <span
+        class="meta-difficulty"
+        style={`color: ${difficultyColor[writeup.data.difficulty] ?? 'var(--color-muted)'}`}
+      >
+        {writeup.data.difficulty}
+      </span>
+      <span class="meta-date">{formattedDate}</span>
+    </div>
+    {writeup.data.tags.length > 0 && (
+      <div class="meta-tags">
+        {writeup.data.tags.map(tag => <TagPill label={tag} />)}
+      </div>
+    )}
+    <p class="meta-excerpt">{writeup.data.excerpt}</p>
+  </div>
+
+  <!-- Prose content -->
+  <div class="prose">
+    <Content />
+  </div>
+
+  <!-- Copy button island -->
+  <CopyButton />
+</Post>
+
+<style>
+  .meta-header {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .writeup-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-ctf {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+
+  .meta-difficulty {
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .meta-date {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+
+  .meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-excerpt {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    border-left: 2px solid var(--color-accent);
+    padding-left: 0.75rem;
+    margin-top: 0.5rem;
+    line-height: 1.6;
+  }
+</style>
