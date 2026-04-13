@@ -4,6 +4,7 @@ import icon from 'astro-icon';
 
 export default defineConfig({
   site: 'https://obadadeg.github.io',
+  base: '/obadaDeg',
   integrations: [
     tailwind(),
     icon(),
