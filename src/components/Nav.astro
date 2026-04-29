@@ -1,22 +1,24 @@
 ---
-const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL; // '/obadaDeg/' in prod, '/' in dev
+const baseTrimmed = base.replace(/\/$/, ''); // '/obadaDeg' or ''
+const strippedPath = Astro.url.pathname.replace(baseTrimmed, '') || '/';
 
 function isActive(path: string): boolean {
-  if (path === '/') return currentPath === '/';
-  return currentPath.startsWith(path);
+  if (path === '/') return strippedPath === '/';
+  return strippedPath.startsWith(path);
 }
 
 const navLinks = [
-  { label: 'Projects', href: '/projects' },
-  { label: 'Writeups', href: '/writeups' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Projects', href: `${base}projects` },
+  { label: 'Writeups', href: `${base}writeups` },
+  { label: 'Blog',     href: `${base}blog` },
+  { label: 'Contact',  href: `${base}contact` },
 ];
 ---
 
 <nav>
   <div class="nav-inner">
-    <a href="/" class="logo">Obada Daghlas</a>
+    <a href={base} class="logo">Obada Daghlas</a>
 
     <!-- Desktop links -->
     <div class="desktop-links">
