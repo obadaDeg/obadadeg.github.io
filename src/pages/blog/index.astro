@@ -17,7 +17,7 @@ const posts = allPosts.sort((a, b) =>
     </p>
 
     {posts.length > 0 ? (
-      <div class="post-list">
+      <div class="post-list animate-on-scroll">
         {posts.map(post => (
           <BlogCard
             title={post.data.title}

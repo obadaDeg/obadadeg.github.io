@@ -27,6 +27,7 @@ const tocHeadings = headings.filter(h => h.depth === 2);
 ---
 
 <Base title={title} description={description}>
+  <div id="read-progress" aria-hidden="true"></div>
   <main class="post-main">
     <div class="post-layout">
       <!-- Main content -->
@@ -85,10 +86,15 @@ const tocHeadings = headings.filter(h => h.depth === 2);
     font-size: 0.875rem;
     margin-bottom: 2rem;
     transition: color 0.15s ease;
+    animation: fade-in 0.35s ease-out 0.1s both;
   }
 
   .back-link:hover {
     color: var(--color-accent);
+  }
+
+  .post-content {
+    animation: fade-in 0.45s ease-out 0.2s both;
   }
 
   /* Table of Contents */
@@ -135,4 +141,31 @@ const tocHeadings = headings.filter(h => h.depth === 2);
       display: none;
     }
   }
+
+  #read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--color-accent);
+    z-index: 9999;
+    transition: width 0.08s linear;
+    pointer-events: none;
+  }
 </style>
+
+<script>
+  function initReadProgress() {
+    const bar = document.getElementById('read-progress');
+    if (!bar) return;
+    const update = () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = total > 0 ? `${Math.min((scrolled / total) * 100, 100)}%` : '0%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+  document.addEventListener('astro:page-load', initReadProgress);
+</script>
