@@ -63,7 +63,7 @@ fullstack development, penetration testing, CTFs, cloud infra<span class="term-c
     <section class="home-section section-separator animate-on-scroll">
       <div class="section-header">
         <h2 class="section-title">Featured Projects</h2>
-        <a href="/projects" class="section-link">All projects →</a>
+        <a href={`${import.meta.env.BASE_URL}projects`} class="section-link">All projects →</a>
       </div>
       <div class="projects-grid">
         {featuredProjects.map(project => (
@@ -84,13 +84,13 @@ fullstack development, penetration testing, CTFs, cloud infra<span class="term-c
   <section class="home-section section-separator animate-on-scroll">
     <div class="section-header">
       <h2 class="section-title">Recent Writeups</h2>
-      <a href="/writeups" class="section-link">All writeups →</a>
+      <a href={`${import.meta.env.BASE_URL}writeups`} class="section-link">All writeups →</a>
     </div>
     {recentWriteups.length > 0 ? (
       <ul class="writeup-list">
         {recentWriteups.map(w => (
           <li class="writeup-item">
-            <a href={`/writeups/${w.slug}`} class="writeup-title">{w.data.title}</a>
+            <a href={`${import.meta.env.BASE_URL}writeups/${w.slug}`} class="writeup-title">{w.data.title}</a>
             <span class="writeup-meta">
               <span class="writeup-ctf">{w.data.ctf}</span>
               <span class="writeup-cat">{w.data.category}</span>
@@ -133,13 +133,13 @@ fullstack development, penetration testing, CTFs, cloud infra<span class="term-c
   <section class="home-section section-separator animate-on-scroll">
     <div class="section-header">
       <h2 class="section-title">From the Blog</h2>
-      <a href="/blog" class="section-link">All posts →</a>
+      <a href={`${import.meta.env.BASE_URL}blog`} class="section-link">All posts →</a>
     </div>
     {recentPosts.length > 0 ? (
       <ul class="writeup-list">
         {recentPosts.map(post => (
           <li class="writeup-item">
-            <a href={`/blog/${post.slug}`} class="writeup-title">{post.data.title}</a>
+            <a href={`${import.meta.env.BASE_URL}blog/${post.slug}`} class="writeup-title">{post.data.title}</a>
             <span class="writeup-meta">
               <span class="writeup-date">
                 {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}

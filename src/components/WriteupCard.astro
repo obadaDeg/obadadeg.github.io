@@ -27,12 +27,12 @@ const difficultyColor: Record<string, string> = {
 
 <article class="writeup-card">
   <div class="card-main">
-    <a href={`/writeups/${slug}`} class="card-title">{title}</a>
+    <a href={`${import.meta.env.BASE_URL}writeups/${slug}`} class="card-title">{title}</a>
     <span class="card-ctf">{ctf}</span>
   </div>
 
   <div class="card-meta">
-    <TagPill label={category} href={`/writeups/category/${category.toLowerCase()}`} />
+    <TagPill label={category} href={`${import.meta.env.BASE_URL}writeups/category/${category.toLowerCase()}`} />
     <span
       class="difficulty-pill"
       style={`color: ${difficultyColor[difficulty] ?? 'var(--color-muted)'};`}

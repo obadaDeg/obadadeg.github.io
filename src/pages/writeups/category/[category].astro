@@ -30,7 +30,7 @@ const allCategories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
 >
   <section>
     <div class="page-header">
-      <a href="/writeups" class="back-link">← All Writeups</a>
+      <a href={`${import.meta.env.BASE_URL}writeups`} class="back-link">← All Writeups</a>
       <h1 class="page-title">{displayCategory} Writeups</h1>
     </div>
 
@@ -39,7 +39,7 @@ const allCategories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
       {allCategories.map(cat => (
         <TagPill
           label={cat}
-          href={`/writeups/category/${cat.toLowerCase()}`}
+          href={`${import.meta.env.BASE_URL}writeups/category/${cat.toLowerCase()}`}
         />
       ))}
     </div>

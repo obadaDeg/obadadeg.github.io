@@ -22,7 +22,7 @@ const categories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
     <!-- Category filter -->
     <div class="category-filter animate-on-scroll">
       {categories.map(cat => (
-        <TagPill label={cat} href={`/writeups/category/${cat.toLowerCase()}`} />
+        <TagPill label={cat} href={`${import.meta.env.BASE_URL}writeups/category/${cat.toLowerCase()}`} />
       ))}
     </div>
 

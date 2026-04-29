@@ -33,7 +33,7 @@ const difficultyColor: Record<string, string> = {
   description={writeup.data.excerpt}
   headings={headings}
   backLabel="← All Writeups"
-  backHref="/writeups"
+  backHref={`${import.meta.env.BASE_URL}writeups`}
 >
   <!-- Metadata header -->
   <div class="meta-header">
@@ -42,7 +42,7 @@ const difficultyColor: Record<string, string> = {
       <span class="meta-ctf">{writeup.data.ctf}</span>
       <TagPill
         label={writeup.data.category}
-        href={`/writeups/category/${writeup.data.category.toLowerCase()}`}
+        href={`${import.meta.env.BASE_URL}writeups/category/${writeup.data.category.toLowerCase()}`}
       />
       <span
         class="meta-difficulty"
