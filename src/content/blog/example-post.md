@@ -3,6 +3,7 @@ title: "Setting Up a Secure Home Lab on a Budget"
 date: 2025-11-20
 tags: ["homelab", "linux", "security", "networking"]
 excerpt: "A practical guide to building a home security lab using a repurposed laptop, Proxmox, and pfSense — without breaking the bank."
+draft: true
 ---
 
 ## Why a Home Lab?

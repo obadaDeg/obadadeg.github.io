@@ -7,8 +7,8 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 type Props = { post: CollectionEntry<'blog'> };
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post: CollectionEntry<'blog'>) => ({
     params: { slug: post.slug },
     props: { post },
   }));
@@ -38,7 +38,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
       <span class="post-date">{formattedDate}</span>
       {post.data.tags.length > 0 && (
         <div class="post-tags">
-          {post.data.tags.map(tag => <TagPill label={tag} />)}
+          {post.data.tags.map((tag: string) => <TagPill label={tag} />)}
         </div>
       )}
     </div>

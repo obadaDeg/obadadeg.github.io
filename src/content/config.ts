@@ -33,6 +33,7 @@ const blog = defineCollection({
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
     excerpt: z.string().max(280),
+    draft: z.boolean().default(false),
   }),
 });
 
