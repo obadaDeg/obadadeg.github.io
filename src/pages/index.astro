@@ -197,6 +197,10 @@ fullstack development, penetration testing, CTFs, cloud infra<span class="term-c
       min-height: auto;
       padding-top: 3rem;
     }
+
+    .terminal-block pre {
+      font-size: 0.72rem;
+    }
   }
 
   /* Glitch effect on hero name hover */
@@ -246,7 +250,9 @@ fullstack development, penetration testing, CTFs, cloud infra<span class="term-c
     padding: 1rem 1.25rem;
     font-size: 0.8rem;
     color: var(--color-muted);
-    overflow-x: auto;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .terminal-block code {
@@ -279,8 +285,18 @@ fullstack development, penetration testing, CTFs, cloud infra<span class="term-c
     color: var(--color-accent);
   }
 
+  .hero-left,
+  .hero-right {
+    min-width: 0;
+  }
+
   .hero-right {
     padding-top: 0.5rem;
+  }
+
+  .terminal-block {
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .hero-title {
