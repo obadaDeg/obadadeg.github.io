@@ -1,5 +1,5 @@
 ---
-const base = import.meta.env.BASE_URL; // '/obadaDeg/' in prod, '/' in dev
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/'); // always trailing slash
 const baseTrimmed = base.replace(/\/$/, ''); // '/obadaDeg' or ''
 const strippedPath = Astro.url.pathname.replace(baseTrimmed, '') || '/';
 
