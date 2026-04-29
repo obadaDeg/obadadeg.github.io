@@ -27,12 +27,16 @@ const recentPosts = allPosts
   <!-- Hero -->
   <section class="hero">
     <div class="hero-left">
+      <div class="avail-badge">
+        <span class="avail-dot"></span>
+        Open to opportunities
+      </div>
       <h1 class="hero-name" data-text="Obada Daghlas">Obada Daghlas</h1>
       <div class="terminal-block hero-term">
-        <pre><code><span class="prompt">&gt;</span> whoami
+        <pre><code id="terminal-code"><span class="prompt">&gt;</span> whoami
 obada@daghlas ~ software engineer, security researcher
 <span class="prompt">&gt;</span> cat interests.txt
-fullstack development, penetration testing, CTFs, cloud infra</code></pre>
+fullstack development, penetration testing, CTFs, cloud infra<span class="term-cursor blink">█</span></code></pre>
       </div>
     </div>
 
@@ -100,6 +104,29 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     ) : (
       <p class="empty-state">Writeups coming soon.</p>
     )}
+  </section>
+
+  <!-- Stack -->
+  <section class="home-section section-separator animate-on-scroll">
+    <div class="section-header">
+      <h2 class="section-title">Stack</h2>
+    </div>
+    <div class="stack-groups">
+      {[
+        { label: 'Languages', items: ['TypeScript', 'Go', 'Python', 'C', 'Bash'] },
+        { label: 'Frontend',  items: ['Astro', 'React', 'Tailwind CSS'] },
+        { label: 'Backend',   items: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'BullMQ', 'Drizzle ORM'] },
+        { label: 'Security',  items: ['Burp Suite', 'Wireshark', 'nmap', 'OSINT', 'Metasploit'] },
+        { label: 'DevOps',    items: ['Docker', 'GitHub Actions', 'Linux'] },
+      ].map(group => (
+        <div class="stack-group">
+          <span class="stack-label">{group.label}</span>
+          <div class="stack-pills">
+            {group.items.map(item => <span class="stack-pill">{item}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
   </section>
 
   <!-- Recent Blog Posts -->
@@ -196,7 +223,6 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
-    white-space: nowrap;
   }
 
   .hero-name:hover::before {
@@ -227,12 +253,26 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     font-family: 'IBM Plex Mono', monospace;
   }
 
-  /* Blinking block cursor after terminal output */
-  .terminal-block code::after {
-    content: '█';
-    color: var(--color-accent);
-    animation: blink 1s step-end infinite;
-    margin-left: 2px;
+  .avail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+    padding: 0.28rem 0.75rem 0.28rem 0.55rem;
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+  }
+
+  .avail-dot {
+    width: 6px;
+    height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse-dot 2.5s ease-in-out infinite;
   }
 
   .prompt {
@@ -368,6 +408,60 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     font-size: 0.875rem;
     font-style: italic;
   }
+
+  /* Stack section */
+  .stack-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .stack-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .stack-label {
+    font-size: 0.68rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-width: 88px;
+    padding-top: 0.28rem;
+    flex-shrink: 0;
+  }
+
+  .stack-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .stack-pill {
+    font-size: 0.75rem;
+    padding: 0.18rem 0.55rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text);
+    transition: border-color 0.15s ease, color 0.15s ease;
+    cursor: default;
+  }
+
+  .stack-pill:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 600px) {
+    .stack-group {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .stack-label {
+      min-width: unset;
+    }
+  }
 </style>
 
 <script>
@@ -398,6 +492,46 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     }, 30);
   }
 
+  async function initTerminalTyping() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const code = document.getElementById('terminal-code') as HTMLElement | null;
+    if (!code) return;
+
+    const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, ms));
+    const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    const sequence: Array<{ cmd: boolean; text: string }> = [
+      { cmd: true,  text: 'whoami' },
+      { cmd: false, text: 'obada@daghlas ~ software engineer, security researcher' },
+      { cmd: true,  text: 'cat interests.txt' },
+      { cmd: false, text: 'fullstack development, penetration testing, CTFs, cloud infra' },
+    ];
+
+    const cursor = () => '<span class="term-cursor">█</span>';
+
+    let built = '';
+    code.innerHTML = cursor();
+
+    for (let i = 0; i < sequence.length; i++) {
+      const item = sequence[i];
+      if (i > 0) {
+        built += '\n';
+        await sleep(item.cmd ? 650 : 250);
+      }
+      const prefix = item.cmd ? '<span class="prompt">&gt;</span> ' : '';
+      const delay  = item.cmd ? 65 : 22;
+      let typed = '';
+      for (const ch of item.text) {
+        typed += ch;
+        code.innerHTML = built + prefix + esc(typed) + cursor();
+        await sleep(delay + Math.random() * 25);
+      }
+      built += prefix + esc(item.text);
+    }
+
+    code.innerHTML = built + '<span class="term-cursor blink">█</span>';
+  }
+
   function initHeroEffects() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -423,4 +557,5 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
   }
 
   document.addEventListener('astro:page-load', initHeroEffects);
+  document.addEventListener('astro:page-load', initTerminalTyping);
 </script>
