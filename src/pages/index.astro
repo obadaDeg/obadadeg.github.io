@@ -27,8 +27,8 @@ const recentPosts = allPosts
   <!-- Hero -->
   <section class="hero">
     <div class="hero-left">
-      <h1 class="hero-name">Obada Daghlas</h1>
-      <div class="terminal-block">
+      <h1 class="hero-name" data-text="Obada Daghlas">Obada Daghlas</h1>
+      <div class="terminal-block hero-term">
         <pre><code><span class="prompt">&gt;</span> whoami
 obada@daghlas ~ software engineer, security researcher
 <span class="prompt">&gt;</span> cat interests.txt
@@ -37,7 +37,7 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     </div>
 
     <div class="hero-right">
-      <p class="hero-title">Software Engineer · Security Researcher</p>
+      <p class="hero-title hero-role">Software Engineer · Security Researcher</p>
       <p class="hero-bio">
         I build things and break them. Software engineering intern by day, CTF player
         and security researcher by night. Interested in full-stack development,
@@ -47,7 +47,7 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
         href="https://github.com/obadaDeg"
         target="_blank"
         rel="noopener noreferrer"
-        class="github-cta"
+        class="github-cta hero-cta"
       >
         ↗ View GitHub
       </a>
@@ -56,7 +56,7 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
 
   <!-- Featured Projects -->
   {featuredProjects.length > 0 && (
-    <section class="home-section section-separator">
+    <section class="home-section section-separator animate-on-scroll">
       <div class="section-header">
         <h2 class="section-title">Featured Projects</h2>
         <a href="/projects" class="section-link">All projects →</a>
@@ -77,7 +77,7 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
   )}
 
   <!-- Recent Writeups -->
-  <section class="home-section section-separator">
+  <section class="home-section section-separator animate-on-scroll">
     <div class="section-header">
       <h2 class="section-title">Recent Writeups</h2>
       <a href="/writeups" class="section-link">All writeups →</a>
@@ -103,7 +103,7 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
   </section>
 
   <!-- Recent Blog Posts -->
-  <section class="home-section section-separator">
+  <section class="home-section section-separator animate-on-scroll">
     <div class="section-header">
       <h2 class="section-title">From the Blog</h2>
       <a href="/blog" class="section-link">All posts →</a>
@@ -133,19 +133,46 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
-    align-items: start;
+    align-items: center;
+    min-height: calc(100vh - 60px);
     padding-bottom: 4rem;
     border-bottom: 1px solid var(--color-border);
     margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Scanline overlay */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.018) 2px,
+      rgba(0, 0, 0, 0.018) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
     .hero {
       grid-template-columns: 1fr;
       gap: 2rem;
+      min-height: auto;
+      padding-top: 3rem;
     }
   }
 
+  /* Glitch effect on hero name hover */
   .hero-name {
     font-family: 'Syne', sans-serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
@@ -153,6 +180,37 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     line-height: 1.05;
     margin-bottom: 1.5rem;
     color: var(--color-text);
+    position: relative;
+    cursor: default;
+    display: inline-block;
+  }
+
+  .hero-name::before,
+  .hero-name::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+  }
+
+  .hero-name:hover::before {
+    color: #ff3366;
+    opacity: 0.85;
+    text-shadow: 2px 0 #ff3366;
+    animation: glitch-clip-1 0.35s steps(1) infinite;
+  }
+
+  .hero-name:hover::after {
+    color: var(--color-accent);
+    opacity: 0.85;
+    text-shadow: -2px 0 var(--color-accent);
+    animation: glitch-clip-2 0.35s steps(1) infinite 0.12s;
   }
 
   .terminal-block pre {
@@ -167,6 +225,14 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
 
   .terminal-block code {
     font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Blinking block cursor after terminal output */
+  .terminal-block code::after {
+    content: '█';
+    color: var(--color-accent);
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
   }
 
   .prompt {
@@ -201,12 +267,14 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     color: var(--color-accent);
     border-radius: 6px;
     font-size: 0.875rem;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    will-change: transform;
   }
 
   .github-cta:hover {
     background: var(--color-accent);
     color: var(--color-bg);
+    box-shadow: 0 0 20px rgba(126, 255, 245, 0.3);
   }
 
   /* Sections */
@@ -301,3 +369,58 @@ fullstack development, penetration testing, CTFs, cloud infra</code></pre>
     font-style: italic;
   }
 </style>
+
+<script>
+  const SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#@$%01';
+
+  function scramble(el: HTMLElement) {
+    const final = el.dataset.text ?? el.textContent ?? '';
+    const len = final.length;
+    const totalFrames = 38;
+    let frame = 0;
+
+    const id = setInterval(() => {
+      let out = '';
+      const progress = frame / totalFrames;
+
+      for (let i = 0; i < len; i++) {
+        if (final[i] === ' ') { out += ' '; continue; }
+        if (progress > i / len + 0.12) {
+          out += final[i];
+        } else {
+          out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+      }
+
+      el.textContent = out;
+      frame++;
+      if (frame > totalFrames) { el.textContent = final; clearInterval(id); }
+    }, 30);
+  }
+
+  function initHeroEffects() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Scramble hero name on load
+    const nameEl = document.querySelector<HTMLElement>('.hero-name');
+    if (nameEl) {
+      setTimeout(() => scramble(nameEl), 200);
+    }
+
+    // Magnetic CTA button (desktop only)
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    const btn = document.querySelector<HTMLElement>('.github-cta');
+    if (!btn) return;
+
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const x = ((e as MouseEvent).clientX - r.left - r.width  / 2) * 0.22;
+      const y = ((e as MouseEvent).clientY - r.top  - r.height / 2) * 0.22;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  }
+
+  document.addEventListener('astro:page-load', initHeroEffects);
+</script>

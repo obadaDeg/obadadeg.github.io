@@ -20,7 +20,7 @@ const categories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
     </p>
 
     <!-- Category filter -->
-    <div class="category-filter">
+    <div class="category-filter animate-on-scroll">
       {categories.map(cat => (
         <TagPill label={cat} href={`/writeups/category/${cat.toLowerCase()}`} />
       ))}
@@ -28,7 +28,7 @@ const categories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
 
     <!-- Writeup list -->
     {writeups.length > 0 ? (
-      <div class="writeup-list">
+      <div class="writeup-list animate-on-scroll">
         {writeups.map(w => (
           <WriteupCard
             title={w.data.title}

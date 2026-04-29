@@ -49,9 +49,17 @@ const difficultyColor: Record<string, string> = {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
+    margin-left: -0.5rem;
     border-bottom: 1px solid var(--color-border);
+    border-radius: 4px;
     flex-wrap: wrap;
+    transition: background 0.15s ease, padding-left 0.15s ease;
+  }
+
+  .writeup-card:hover {
+    background: var(--color-surface);
+    padding-left: 0.75rem;
   }
 
   .card-main {

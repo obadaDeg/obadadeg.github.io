@@ -85,10 +85,15 @@ const tocHeadings = headings.filter(h => h.depth === 2);
     font-size: 0.875rem;
     margin-bottom: 2rem;
     transition: color 0.15s ease;
+    animation: fade-in 0.35s ease-out 0.1s both;
   }
 
   .back-link:hover {
     color: var(--color-accent);
+  }
+
+  .post-content {
+    animation: fade-in 0.45s ease-out 0.2s both;
   }
 
   /* Table of Contents */

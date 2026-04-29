@@ -27,11 +27,12 @@ const { label, href } = Astro.props;
     font-size: 0.75rem;
     font-family: 'IBM Plex Mono', monospace;
     white-space: nowrap;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, transform 0.15s ease;
   }
 
   a.tag-pill:hover {
     background: var(--color-accent);
     color: var(--color-bg);
+    transform: scale(1.05);
   }
 </style>
