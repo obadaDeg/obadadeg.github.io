@@ -1,21 +1,22 @@
 ---
 import Page from '@layouts/Page.astro';
 import ProjectCard from '@components/ProjectCard.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-const allProjects = await getCollection('projects');
+const allProjects: CollectionEntry<'projects'>[] = await getCollection('projects');
 const featuredProjects = allProjects
   .filter(p => p.data.featured)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
-const allWriteups = await getCollection('writeups');
+const allWriteups: CollectionEntry<'writeups'>[] = await getCollection('writeups');
 const recentWriteups = allWriteups
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
-const allPosts = await getCollection('blog');
+const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog');
 const recentPosts = allPosts
+  .filter(p => !p.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 2);
 ---
