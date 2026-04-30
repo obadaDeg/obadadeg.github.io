@@ -1,0 +1,177 @@
+---
+interface SeriesNavItem {
+  title: string;
+  href: string;
+}
+
+interface Props {
+  seriesTitle: string;
+  seriesSlug: string;
+  currentIndex: number; // 0-based, among published items only
+  total: number;
+  prevItem?: SeriesNavItem;
+  nextItem?: SeriesNavItem;
+}
+
+const { seriesTitle, seriesSlug, currentIndex, total, prevItem, nextItem } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const seriesHref = `${base}series/${seriesSlug}`;
+const partNumber = currentIndex + 1;
+---
+
+<div class="series-nav">
+  <div class="series-nav-header">
+    <span class="series-nav-label">Part of a Series</span>
+    <a href={seriesHref} class="series-nav-title">{seriesTitle}</a>
+    <span class="series-nav-position">Part {partNumber} of {total}</span>
+  </div>
+  <div class="series-nav-links">
+    {prevItem ? (
+      <a href={prevItem.href} class="series-nav-prev">
+        <span class="series-nav-direction">← Previous</span>
+        <span class="series-nav-item-title">{prevItem.title}</span>
+      </a>
+    ) : (
+      <span class="series-nav-prev series-nav-disabled">
+        <span class="series-nav-direction">← Previous</span>
+        <span class="series-nav-item-title">Start of series</span>
+      </span>
+    )}
+    {nextItem ? (
+      <a href={nextItem.href} class="series-nav-next">
+        <span class="series-nav-direction">Next →</span>
+        <span class="series-nav-item-title">{nextItem.title}</span>
+      </a>
+    ) : (
+      <span class="series-nav-next series-nav-disabled">
+        <span class="series-nav-direction">Next →</span>
+        <span class="series-nav-item-title">End of series</span>
+      </span>
+    )}
+  </div>
+</div>
+
+<style>
+  .series-nav {
+    margin-top: 3rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+
+  .series-nav-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .series-nav-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    flex-shrink: 0;
+  }
+
+  .series-nav-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    transition: opacity 0.15s ease;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .series-nav-title:hover {
+    opacity: 0.8;
+  }
+
+  .series-nav-position {
+    font-size: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .series-nav-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .series-nav-prev,
+  .series-nav-next {
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: background 0.15s ease;
+    text-decoration: none;
+  }
+
+  a.series-nav-prev,
+  a.series-nav-next {
+    cursor: pointer;
+  }
+
+  a.series-nav-prev:hover,
+  a.series-nav-next:hover {
+    background: rgba(126, 255, 245, 0.04);
+  }
+
+  .series-nav-prev {
+    border-right: 1px solid var(--color-border);
+  }
+
+  .series-nav-next {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .series-nav-direction {
+    font-size: 0.72rem;
+    color: var(--color-accent);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .series-nav-disabled .series-nav-direction {
+    color: var(--color-muted);
+    opacity: 0.4;
+  }
+
+  .series-nav-item-title {
+    font-size: 0.82rem;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .series-nav-disabled .series-nav-item-title {
+    color: var(--color-muted);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 480px) {
+    .series-nav-links {
+      grid-template-columns: 1fr;
+    }
+    .series-nav-prev {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .series-nav-next {
+      text-align: left;
+      align-items: flex-start;
+    }
+    .series-nav-position {
+      display: none;
+    }
+  }
+</style>

@@ -5,6 +5,7 @@ tech: ["TypeScript", "Node.js", "BullMQ", "Redis", "PostgreSQL", "Docker", "GitH
 github: "https://github.com/obadaDeg/pipeline-orchestrator"
 featured: true
 date: 2026-01-15
+draft: false
 ---
 
 A backend service that receives incoming webhooks, queues them asynchronously via BullMQ + Redis, and fans out processed payloads to subscriber endpoints with exponential backoff and delivery tracking.

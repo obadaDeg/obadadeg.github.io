@@ -10,6 +10,8 @@ const projects = defineCollection({
     demo: z.string().url().optional(),
     featured: z.boolean().default(false),
     date: z.coerce.date(),
+    draft: z.boolean().default(false),
+    series: z.string().optional(),
     coverImage: image().optional(),
   }),
 });
@@ -25,6 +27,7 @@ const writeups = defineCollection({
     tags: z.array(z.string()).default([]),
     excerpt: z.string().max(280),
     draft: z.boolean().default(false),
+    series: z.string().optional(),
     coverImage: image().optional(),
   }),
 });
@@ -37,8 +40,24 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     excerpt: z.string().max(280),
     draft: z.boolean().default(false),
+    series: z.string().optional(),
     coverImage: image().optional(),
   }),
 });
 
-export const collections = { projects, writeups, blog };
+const seriesItem = z.object({
+  collection: z.enum(['blog', 'writeups', 'projects']),
+  slug: z.string(),
+});
+
+const series = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(280),
+    draft: z.boolean().default(false),
+    items: z.array(seriesItem).min(1),
+  }),
+});
+
+export const collections = { projects, writeups, blog, series };

@@ -8,14 +8,19 @@ interface Props {
   github: string;
   demo?: string;
   featured?: boolean;
+  href?: string;
 }
 
-const { title, description, tech, github, demo, featured = false } = Astro.props;
+const { title, description, tech, github, demo, featured = false, href } = Astro.props;
 ---
 
 <article class="project-card">
   <div class="card-header">
-    <h3 class="card-title">{title}</h3>
+    {href ? (
+      <a href={href} class="card-title-link"><h3 class="card-title">{title}</h3></a>
+    ) : (
+      <h3 class="card-title">{title}</h3>
+    )}
     {featured && <span class="featured-badge">Featured</span>}
   </div>
 
@@ -68,6 +73,15 @@ const { title, description, tech, github, demo, featured = false } = Astro.props
     font-weight: 700;
     color: var(--color-text);
     margin: 0;
+  }
+
+  .card-title-link {
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .card-title-link:hover .card-title {
+    color: var(--color-accent);
   }
 
   .featured-badge {

@@ -7,6 +7,7 @@ date: 2026-01-01
 tags: ["tag1", "tag2"]
 excerpt: "[Short 1-2 sentence description of the challenge and vulnerability.]"
 draft: true
+series: ""  # Optional: set to the series slug to link this writeup to a series
 ---
 
 <!-- 
@@ -22,6 +23,7 @@ Your task is to frame the content using the following structure and guidelines:
 5. DO NOT apply inline styles (like `width: 100%`) to media tags; the global CSS `.prose img, .prose video` handles responsiveness automatically.
 6. Code Blocks: Use standard markdown fenced code blocks with the appropriate language tag.
 7. Update the frontmatter above with the appropriate metadata. Ensure the `draft: true` flag remains until the user explicitly asks to publish it.
+8. Series: If the user mentions this writeup is part of a series, set `series: "series-slug"` in the frontmatter (matching the filename of the series entry in `src/content/series/`). The Series Navigator component will automatically appear at the bottom of the writeup.
 -->
 
 ## Introduction
