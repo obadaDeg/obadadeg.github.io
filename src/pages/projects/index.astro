@@ -3,7 +3,8 @@ import Page from '@layouts/Page.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
-const allProjects = await getCollection('projects');
+const allProjects = await getCollection('projects', p => !p.data.draft);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const projects = allProjects.sort((a, b) =>
   b.data.date.getTime() - a.data.date.getTime()
 );
@@ -25,6 +26,7 @@ const projects = allProjects.sort((a, b) =>
           github={project.data.github}
           demo={project.data.demo}
           featured={project.data.featured}
+          href={`${base}projects/${project.slug}`}
         />
       ))}
     </div>

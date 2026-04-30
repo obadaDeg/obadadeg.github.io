@@ -1,0 +1,223 @@
+---
+import Post from '@layouts/Post.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+export async function getStaticPaths() {
+  const allSeries = await getCollection('series', s => !s.data.draft);
+
+  const paths = await Promise.all(
+    allSeries.map(async (s) => {
+      // Resolve all published items for this series
+      const resolvedItems = [];
+      for (const item of s.data.items) {
+        try {
+          const entry = await getEntry(item.collection, item.slug);
+          if (entry && !entry.data.draft) {
+            resolvedItems.push({ entry, collection: item.collection, slug: item.slug });
+          }
+        } catch {
+          console.warn(`[series/${s.slug}] Could not resolve ${item.collection}/${item.slug} — skipping`);
+        }
+      }
+      return {
+        params: { slug: s.slug },
+        props: { series: s, resolvedItems },
+      };
+    })
+  );
+
+  return paths;
+}
+
+const { series, resolvedItems } = Astro.props;
+const { Content } = await series.render();
+
+function getItemHref(collection: string, slug: string): string {
+  const collectionPath = collection === 'writeups' ? 'writeups' : collection === 'blog' ? 'blog' : 'projects';
+  return `${base}${collectionPath}/${slug}`;
+}
+
+function getBadgeLabel(collection: string): string {
+  if (collection === 'blog') return 'Blog';
+  if (collection === 'writeups') return 'Writeup';
+  return 'Project';
+}
+---
+
+<Post
+  title={series.data.title}
+  description={series.data.description}
+  backLabel="← All Series"
+  backHref={`${base}series`}
+>
+  <div class="series-header">
+    <h1 class="series-title">{series.data.title}</h1>
+    <p class="series-desc">{series.data.description}</p>
+    <span class="series-count">{resolvedItems.length} {resolvedItems.length === 1 ? 'part' : 'parts'}</span>
+  </div>
+
+  <!-- Optional series intro body -->
+  <div class="prose series-intro">
+    <Content />
+  </div>
+
+  <!-- Ordered item list -->
+  {resolvedItems.length > 0 ? (
+    <ol class="series-items">
+      {resolvedItems.map(({ entry, collection, slug }, i) => (
+        <li class="series-item">
+          <span class="series-item-num">{String(i + 1).padStart(2, '0')}</span>
+          <div class="series-item-body">
+            <a href={getItemHref(collection, slug)} class="series-item-title">
+              {entry.data.title}
+            </a>
+            {'excerpt' in entry.data && entry.data.excerpt && (
+              <p class="series-item-excerpt">{entry.data.excerpt}</p>
+            )}
+            {'description' in entry.data && !('excerpt' in entry.data) && entry.data.description && (
+              <p class="series-item-excerpt">{entry.data.description}</p>
+            )}
+          </div>
+          <span class={`series-item-badge badge-${collection}`}>{getBadgeLabel(collection)}</span>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p class="empty-state">No published items in this series yet.</p>
+  )}
+</Post>
+
+<style>
+  .series-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .series-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .series-desc {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .series-count {
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .series-intro {
+    margin-bottom: 2rem;
+  }
+
+  .series-intro:empty {
+    display: none;
+  }
+
+  .series-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .series-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.15s ease;
+  }
+
+  .series-item:last-child {
+    border-bottom: none;
+  }
+
+  .series-item:hover {
+    background: rgba(126, 255, 245, 0.03);
+  }
+
+  .series-item-num {
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--color-muted);
+    opacity: 0.5;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+    min-width: 24px;
+  }
+
+  .series-item-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .series-item-title {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.2rem;
+    transition: color 0.15s ease;
+  }
+
+  .series-item-title:hover {
+    color: var(--color-accent);
+  }
+
+  .series-item-excerpt {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .series-item-badge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .badge-blog {
+    background: rgba(126, 255, 245, 0.08);
+    color: var(--color-accent);
+    border: 1px solid rgba(126, 255, 245, 0.25);
+  }
+
+  .badge-writeups {
+    background: rgba(250, 204, 21, 0.08);
+    color: #facc15;
+    border: 1px solid rgba(250, 204, 21, 0.25);
+  }
+
+  .badge-projects {
+    background: rgba(167, 139, 250, 0.08);
+    color: #a78bfa;
+    border: 1px solid rgba(167, 139, 250, 0.25);
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    font-style: italic;
+  }
+</style>

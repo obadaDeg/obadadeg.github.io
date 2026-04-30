@@ -1,7 +1,9 @@
 ---
 import Page from '@layouts/Page.astro';
 import ProjectCard from '@components/ProjectCard.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 const allProjects: CollectionEntry<'projects'>[] = await getCollection('projects');
 const featuredProjects = allProjects
@@ -19,6 +21,24 @@ const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog');
 const recentPosts = allPosts
   .filter(p => !p.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 2);
+
+// Recent Series — fetch published series with at least one published item
+const allSeries = await getCollection('series', s => !s.data.draft);
+const seriesWithCounts = await Promise.all(
+  allSeries.map(async (s) => {
+    let count = 0;
+    for (const item of s.data.items) {
+      try {
+        const entry = await getEntry(item.collection, item.slug);
+        if (entry && !entry.data.draft) count++;
+      } catch { /* skip */ }
+    }
+    return { series: s, count };
+  })
+);
+const recentSeries = seriesWithCounts
+  .filter(({ count }) => count > 0)
   .slice(0, 2);
 ---
 
@@ -154,6 +174,27 @@ fullstack development, penetration testing, CTFs, cloud infra<span class="term-c
       <p class="empty-state">Posts coming soon.</p>
     )}
   </section>
+
+  <!-- Recent Series -->
+  {recentSeries.length > 0 && (
+    <section class="home-section section-separator animate-on-scroll">
+      <div class="section-header">
+        <h2 class="section-title">Series</h2>
+        <a href={`${base}series`} class="section-link">All series →</a>
+      </div>
+      <ul class="writeup-list">
+        {recentSeries.map(({ series: s, count }) => (
+          <li class="writeup-item">
+            <a href={`${base}series/${s.slug}`} class="writeup-title">{s.data.title}</a>
+            <span class="writeup-meta">
+              <span class="writeup-ctf">{s.data.description}</span>
+              <span class="writeup-cat">{count} {count === 1 ? 'part' : 'parts'}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </Page>
 
 <style>

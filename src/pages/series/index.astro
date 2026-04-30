@@ -1,0 +1,149 @@
+---
+import Page from '@layouts/Page.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const allSeries = await getCollection('series', s => !s.data.draft);
+
+// For each series, count how many items are published
+const seriesWithCounts = await Promise.all(
+  allSeries.map(async (s) => {
+    let publishedCount = 0;
+    for (const item of s.data.items) {
+      try {
+        const entry = await getEntry(item.collection, item.slug);
+        if (entry && !entry.data.draft) publishedCount++;
+      } catch {
+        // missing entry — skip
+      }
+    }
+    return { series: s, publishedCount };
+  })
+);
+
+// Only show series that have at least one published item
+const visibleSeries = seriesWithCounts.filter(({ publishedCount }) => publishedCount > 0);
+---
+
+<Page
+  title="Series"
+  description="Curated reading paths and content playlists by Obada Daghlas — thematic series spanning blog posts, CTF writeups, and projects."
+>
+  <section>
+    <h1 class="page-title">Series</h1>
+    <p class="page-sub">
+      Curated paths through related posts, writeups, and projects — read as a journey.
+    </p>
+
+    {visibleSeries.length > 0 ? (
+      <div class="series-list animate-on-scroll">
+        {visibleSeries.map(({ series: s, publishedCount }) => (
+          <a href={`${base}series/${s.slug}`} class="series-card">
+            <div class="series-card-body">
+              <h2 class="series-card-title">{s.data.title}</h2>
+              <p class="series-card-desc">{s.data.description}</p>
+            </div>
+            <div class="series-card-meta">
+              <span class="series-card-count">{publishedCount} {publishedCount === 1 ? 'part' : 'parts'}</span>
+              <span class="series-card-arrow">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No series yet — check back soon.</p>
+    )}
+  </section>
+</Page>
+
+<style>
+  .page-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-sub {
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .series-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .series-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .series-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 16px rgba(126, 255, 245, 0.06);
+  }
+
+  .series-card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .series-card-title {
+    font-size: 1rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.35rem;
+    transition: color 0.15s ease;
+  }
+
+  .series-card:hover .series-card-title {
+    color: var(--color-accent);
+  }
+
+  .series-card-desc {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  .series-card-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .series-card-count {
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+
+  .series-card-arrow {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .series-card:hover .series-card-arrow {
+    opacity: 1;
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    font-style: italic;
+  }
+</style>
