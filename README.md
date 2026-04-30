@@ -119,3 +119,5 @@ I write about algorithms, web security, and things I'm building. Everything live
 <div align="center">
   <strong>"Build things. Break things. Write about both." ✨</strong>
 </div>
+
+<!-- sync trigger -->
