@@ -1,0 +1,27 @@
+name: Sync README to Profile
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Push to profile repository
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.README_SYNC_TOKEN }}
+        with:
+          source_file: 'README.md'
+          destination_repo: 'obadaDeg/obadaDeg'
+          destination_folder: '/'
+          user_email: 'obada.daghlas.dev@gmail.com'
+          user_name: 'obadaDeg'
+          commit_message: 'Sync README from portfolio repository'
