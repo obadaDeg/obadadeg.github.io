@@ -64,8 +64,9 @@ a:hover {
   color: var(--color-accent);
 }
 
-img {
+img, video {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -139,6 +140,15 @@ img {
 
 .prose li {
   margin-bottom: 0.4rem;
+}
+
+.prose img,
+.prose video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  margin: 2rem 0;
 }
 
 .prose blockquote {

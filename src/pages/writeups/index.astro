@@ -5,9 +5,9 @@ import TagPill from '@components/TagPill.astro';
 import { getCollection } from 'astro:content';
 
 const allWriteups = await getCollection('writeups');
-const writeups = allWriteups.sort((a, b) =>
-  b.data.date.getTime() - a.data.date.getTime()
-);
+const writeups = allWriteups
+  .filter(w => !w.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const categories = ['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT'];
 ---

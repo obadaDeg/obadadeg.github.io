@@ -5,7 +5,8 @@ import CopyButton from '@components/CopyButton.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 export async function getStaticPaths() {
-  const writeups = await getCollection('writeups');
+  const allWriteups = await getCollection('writeups');
+  const writeups = allWriteups.filter(w => !w.data.draft);
   return writeups.map(w => ({
     params: { slug: w.slug },
     props: { writeup: w },

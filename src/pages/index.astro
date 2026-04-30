@@ -11,6 +11,7 @@ const featuredProjects = allProjects
 
 const allWriteups: CollectionEntry<'writeups'>[] = await getCollection('writeups');
 const recentWriteups = allWriteups
+  .filter(w => !w.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 

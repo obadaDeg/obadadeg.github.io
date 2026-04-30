@@ -2,7 +2,7 @@ import { defineCollection, z } from 'astro:content';
 
 const projects = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string().max(280),
     tech: z.array(z.string()).min(1),
@@ -10,12 +10,13 @@ const projects = defineCollection({
     demo: z.string().url().optional(),
     featured: z.boolean().default(false),
     date: z.coerce.date(),
+    coverImage: image().optional(),
   }),
 });
 
 const writeups = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     ctf: z.string(),
     category: z.enum(['Web', 'Pwn', 'Crypto', 'Forensics', 'Misc', 'OSINT']),
@@ -23,17 +24,20 @@ const writeups = defineCollection({
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
     excerpt: z.string().max(280),
+    draft: z.boolean().default(false),
+    coverImage: image().optional(),
   }),
 });
 
 const blog = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
     excerpt: z.string().max(280),
     draft: z.boolean().default(false),
+    coverImage: image().optional(),
   }),
 });
 

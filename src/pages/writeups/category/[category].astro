@@ -13,6 +13,7 @@ export async function getStaticPaths() {
     props: {
       category: cat,
       writeups: allWriteups
+        .filter(w => !w.data.draft)
         .filter(w => w.data.category.toLowerCase() === cat)
         .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
     },
