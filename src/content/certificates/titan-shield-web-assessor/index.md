@@ -1,7 +1,7 @@
 ---
 title: "Titan Shield Certified Web Assessor"
 issuer: "Titan Shield"
-issueDate: "2024-01-01"
+issueDate: "2025-11-08"
 assetPath: "./Titan-sheild-certified-web-assessor.pdf"
 draft: false
 ---

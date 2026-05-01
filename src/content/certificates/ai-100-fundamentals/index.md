@@ -1,7 +1,7 @@
 ---
 title: "AI 100 Fundamentals"
 issuer: "TCM Security"
-issueDate: "2024-02-15"
+issueDate: "2025-11-18"
 assetPath: "./certificate-of-completion-for-ai-100-fundamentals.pdf"
 draft: false
 ---

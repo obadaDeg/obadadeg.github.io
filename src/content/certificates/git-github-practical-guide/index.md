@@ -1,7 +1,7 @@
 ---
 title: "Git & GitHub - The Practical Guide"
 issuer: "Academind"
-issueDate: "2023-11-10"
+issueDate: "2026-02-09"
 assetPath: "./certificate-of-completion-for-git-github-the-practical-guide.pdf"
 draft: false
 ---
