@@ -1,0 +1,59 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  certReference: { collection: 'certificates', slug: string };
+}
+
+const { certReference } = Astro.props;
+
+// Fetch the actual certificate data using the reference
+const certEntry = await getEntry(certReference.collection, certReference.slug);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+if (!certEntry) {
+  // Graceful fallback if reference is broken during dev (should be caught by Zod in prod)
+  return;
+}
+---
+
+<a href={`${base}certificates/${certEntry.slug}`} class="certificate-badge" title={`View ${certEntry.data.title} Certificate`}>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="badge-icon">
+    <circle cx="12" cy="8" r="7"></circle>
+    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+  </svg>
+  <span class="badge-text">Certified In: <span class="badge-title">{certEntry.data.title}</span></span>
+</a>
+
+<style>
+  .certificate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    background: var(--color-accent-dim);
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-family: 'Syne', sans-serif;
+    transition: all 0.2s ease;
+    width: fit-content;
+  }
+
+  .certificate-badge:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(126, 255, 245, 0.15);
+  }
+
+  .badge-icon {
+    flex-shrink: 0;
+  }
+
+  .badge-title {
+    font-weight: 700;
+  }
+</style>

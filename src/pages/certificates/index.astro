@@ -1,0 +1,65 @@
+---
+import Page from '@layouts/Page.astro';
+import CertificateCard from '@components/CertificateCard.astro';
+import { getCollection } from 'astro:content';
+
+const allCertificates = await getCollection('certificates', c => !c.data.draft);
+const certificates = allCertificates.sort((a, b) =>
+  b.data.issueDate.getTime() - a.data.issueDate.getTime()
+);
+---
+
+<Page title="Certificates">
+  <section>
+    <h1 class="page-title">Certificates</h1>
+    <p class="page-sub">
+      Formal credentials and ongoing education in cybersecurity and software engineering.
+    </p>
+
+    <div class="certificates-grid animate-on-scroll">
+      {certificates.map(cert => (
+        <CertificateCard
+          title={cert.data.title}
+          issuer={cert.data.issuer}
+          date={cert.data.issueDate}
+          slug={cert.slug}
+          assetPath={cert.data.assetPath}
+        />
+      ))}
+    </div>
+
+    {certificates.length === 0 && (
+      <p class="empty-state">No certificates available yet.</p>
+    )}
+  </section>
+</Page>
+
+<style>
+  .page-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-sub {
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .certificates-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    font-style: italic;
+  }
+</style>

@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, reference } from 'astro:content';
 
 const projects = defineCollection({
   type: 'content',
@@ -13,6 +13,7 @@ const projects = defineCollection({
     draft: z.boolean().default(false),
     series: z.string().optional(),
     coverImage: image().optional(),
+    relatedCertificates: z.array(reference('certificates')).optional(),
   }),
 });
 
@@ -29,6 +30,7 @@ const writeups = defineCollection({
     draft: z.boolean().default(false),
     series: z.string().optional(),
     coverImage: image().optional(),
+    relatedCertificates: z.array(reference('certificates')).optional(),
   }),
 });
 
@@ -42,6 +44,7 @@ const blog = defineCollection({
     draft: z.boolean().default(false),
     series: z.string().optional(),
     coverImage: image().optional(),
+    relatedCertificates: z.array(reference('certificates')).optional(),
   }),
 });
 
@@ -57,7 +60,21 @@ const series = defineCollection({
     description: z.string().max(280),
     draft: z.boolean().default(false),
     items: z.array(seriesItem).min(1),
+    relatedCertificates: z.array(reference('certificates')).optional(),
   }),
 });
 
-export const collections = { projects, writeups, blog, series };
+const certificates = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    issuer: z.string(),
+    issueDate: z.coerce.date(),
+    credentialId: z.string().optional(),
+    credentialUrl: z.string().url().optional(),
+    assetPath: z.string(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { projects, writeups, blog, series, certificates };

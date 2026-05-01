@@ -1,5 +1,6 @@
 ---
 import Base from './Base.astro';
+import CertificateBadge from '@components/CertificateBadge.astro';
 
 interface Heading {
   depth: number;
@@ -13,6 +14,7 @@ interface Props {
   headings?: Heading[];
   backLabel?: string;
   backHref?: string;
+  relatedCertificates?: { collection: 'certificates', slug: string }[];
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   headings = [],
   backLabel = '← Back',
   backHref = '/',
+  relatedCertificates = [],
 } = Astro.props;
 
 const tocHeadings = headings.filter(h => h.depth === 2);
@@ -33,6 +36,13 @@ const tocHeadings = headings.filter(h => h.depth === 2);
       <!-- Main content -->
       <article class="post-content">
         <a href={backHref} class="back-link">{backLabel}</a>
+        {relatedCertificates.length > 0 && (
+          <div class="post-badges">
+            {relatedCertificates.map(cert => (
+              <CertificateBadge certReference={cert} />
+            ))}
+          </div>
+        )}
         <slot />
       </article>
 
@@ -91,6 +101,15 @@ const tocHeadings = headings.filter(h => h.depth === 2);
 
   .back-link:hover {
     color: var(--color-accent);
+  }
+
+  .post-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+    animation: fade-in 0.35s ease-out 0.15s both;
   }
 
   .post-content {
