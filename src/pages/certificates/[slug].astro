@@ -1,0 +1,235 @@
+---
+import Post from '@layouts/Post.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+export async function getStaticPaths() {
+  const certificates = await getCollection('certificates', c => !c.data.draft);
+  
+  // To find related content efficiently, we'll fetch all other collections
+  const allBlogs = await getCollection('blog', p => !p.data.draft);
+  const allWriteups = await getCollection('writeups', p => !p.data.draft);
+  const allProjects = await getCollection('projects', p => !p.data.draft);
+  const allSeries = await getCollection('series', p => !p.data.draft);
+
+  return certificates.map((cert) => {
+    // Find content that references this certificate
+    const relatedContent = [
+      ...allBlogs.filter(b => b.data.relatedCertificates?.some(ref => ref.slug === cert.slug)).map(b => ({ type: 'blog', item: b })),
+      ...allWriteups.filter(w => w.data.relatedCertificates?.some(ref => ref.slug === cert.slug)).map(w => ({ type: 'writeup', item: w })),
+      ...allProjects.filter(p => p.data.relatedCertificates?.some(ref => ref.slug === cert.slug)).map(p => ({ type: 'project', item: p })),
+      ...allSeries.filter(s => s.data.relatedCertificates?.some(ref => ref.slug === cert.slug)).map(s => ({ type: 'series', item: s })),
+    ].sort((a, b) => {
+      // @ts-ignore - all have dates except potentially some series structures depending on how we define it, assuming items have dates or using 0 fallback
+      const dateA = a.item.data.date ? a.item.data.date.getTime() : 0;
+      // @ts-ignore
+      const dateB = b.item.data.date ? b.item.data.date.getTime() : 0;
+      return dateB - dateA;
+    });
+
+    return {
+      params: { slug: cert.slug },
+      props: { cert, relatedContent },
+    };
+  });
+}
+
+const { cert, relatedContent } = Astro.props;
+const { Content, headings } = await cert.render();
+
+const formattedDate = cert.data.issueDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Post
+  title={cert.data.title}
+  description={`Certificate issued by ${cert.data.issuer} on ${formattedDate}`}
+  headings={headings}
+  backLabel="← All Certificates"
+  backHref={`${base}certificates`}
+>
+  <div class="cert-header">
+    <h1 class="cert-title">{cert.data.title}</h1>
+    <p class="cert-issuer">Issued by {cert.data.issuer}</p>
+    <span class="cert-date">{formattedDate}</span>
+
+    {cert.data.credentialUrl && (
+      <a
+        href={cert.data.credentialUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="credential-link"
+      >
+        Verify Credential ↗
+      </a>
+    )}
+  </div>
+
+  <div class="cert-asset-container">
+    <a href={`${base}certificates/${cert.data.assetPath.split('/').pop()}`} target="_blank" rel="noopener noreferrer" class="asset-wrapper">
+      <img src={`${base}images/certificates/${cert.data.assetPath.split('/').pop()?.replace('.pdf', '') || cert.slug}.png`} alt={`${cert.data.title} Thumbnail`} class="cert-thumbnail" />
+      <div class="asset-overlay">
+        <span>Click to view full PDF</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="prose">
+    <Content />
+  </div>
+
+  {relatedContent.length > 0 && (
+    <div class="related-work">
+      <h2>Applied Skills & Related Work</h2>
+      <p class="related-desc">I have practically applied the skills from this certification in the following work:</p>
+      <ul class="related-list">
+        {relatedContent.map(({ type, item }) => (
+          <li>
+            <a href={`${base}${type === 'writeup' ? 'writeups' : type === 'project' ? 'projects' : type === 'series' ? 'series' : 'blog'}/${item.slug}`} class="related-link">
+              <span class="related-type">[{type}]</span> {item.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</Post>
+
+<style>
+  .cert-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cert-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-issuer {
+    color: var(--color-muted);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-date {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .credential-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    background: var(--color-accent-dim);
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .credential-link:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  .cert-asset-container {
+    margin-bottom: 3rem;
+  }
+
+  .asset-wrapper {
+    display: block;
+    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .cert-thumbnail {
+    width: 100%;
+    display: block;
+    transition: filter 0.2s ease;
+  }
+
+  .asset-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: #fff;
+    font-weight: 600;
+    backdrop-filter: blur(2px);
+  }
+
+  .asset-wrapper:hover .cert-thumbnail {
+    filter: brightness(0.7);
+  }
+
+  .asset-wrapper:hover .asset-overlay {
+    opacity: 1;
+  }
+
+  .related-work {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .related-work h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .related-desc {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .related-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .related-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .related-link:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-dim);
+  }
+
+  .related-type {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+</style>
