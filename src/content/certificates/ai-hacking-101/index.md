@@ -1,6 +1,6 @@
 ---
 title: "AI Hacking 101"
-issuer: "The Docs"
+issuer: "TCM Security"
 issueDate: "2024-05-01"
 assetPath: "./certificate-of-completion-for-ai-hacking-101.pdf"
 draft: false
