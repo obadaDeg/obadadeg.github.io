@@ -1,6 +1,6 @@
 ---
 title: "Practical Web Hacking"
-issuer: "The Docs"
+issuer: "TCM Security"
 issueDate: "2023-08-20"
 assetPath: "./certificate-of-completion-for-practical-web-hacking.pdf"
 draft: false
