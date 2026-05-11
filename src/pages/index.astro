@@ -184,12 +184,10 @@ web app security, penetration testing, CTFs, backend engineering, cloud infra<sp
       </div>
       <ul class="writeup-list">
         {recentSeries.map(({ series: s, count }) => (
-          <li class="writeup-item">
+          <li class="series-item">
             <a href={`${base}series/${s.slug}`} class="writeup-title">{s.data.title}</a>
-            <span class="writeup-meta">
-              <span class="writeup-ctf">{s.data.description}</span>
-              <span class="writeup-cat">{count} {count === 1 ? 'part' : 'parts'}</span>
-            </span>
+            <p class="series-desc">{s.data.description}</p>
+            <span class="writeup-cat">{count} {count === 1 ? 'part' : 'parts'}</span>
           </li>
         ))}
       </ul>
@@ -520,6 +518,22 @@ web app security, penetration testing, CTFs, backend engineering, cloud infra<sp
     .stack-label {
       min-width: unset;
     }
+  }
+
+  /* Series items — stacked layout to accommodate long descriptions */
+  .series-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .series-desc {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
   }
 </style>
 

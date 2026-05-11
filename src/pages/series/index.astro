@@ -104,6 +104,8 @@ const visibleSeries = seriesWithCounts.filter(({ publishedCount }) => publishedC
     color: var(--color-text);
     margin-bottom: 0.35rem;
     transition: color 0.15s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .series-card:hover .series-card-title {
@@ -114,6 +116,8 @@ const visibleSeries = seriesWithCounts.filter(({ publishedCount }) => publishedC
     font-size: 0.82rem;
     color: var(--color-muted);
     line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .series-card-meta {
@@ -140,6 +144,26 @@ const visibleSeries = seriesWithCounts.filter(({ publishedCount }) => publishedC
 
   .series-card:hover .series-card-arrow {
     opacity: 1;
+  }
+
+  @media (max-width: 600px) {
+    .series-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .series-card-meta {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .series-card-arrow {
+      opacity: 1;
+    }
   }
 
   .empty-state {
