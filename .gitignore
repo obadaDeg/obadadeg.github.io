@@ -30,3 +30,10 @@ drafts/
 # Package manager lock files (keep pnpm only)
 package-lock.json
 yarn.lock
+
+# Graphify knowledge graph output (generated, not source)
+graphify-out/
+
+# Claude local tooling (skills, agent config)
+.claude/CLAUDE.md
+.claude/skills/
