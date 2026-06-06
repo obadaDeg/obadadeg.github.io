@@ -1,6 +1,4 @@
 ---
-import TagPill from './TagPill.astro';
-
 interface Props {
   title: string;
   date: Date;
@@ -19,38 +17,39 @@ const formattedDate = date.toLocaleDateString('en-US', {
 ---
 
 <article class="blog-card">
-  <div class="card-top">
-    <a href={`${import.meta.env.BASE_URL}blog/${slug}`} class="card-title">{title}</a>
-    <span class="card-date">{formattedDate}</span>
+  <div class="bc-top">
+    <a href={`${import.meta.env.BASE_URL}blog/${slug}`} class="bc-title">{title}</a>
+    <time class="bc-date">{formattedDate}</time>
   </div>
 
-  <p class="card-excerpt">{excerpt}</p>
+  {excerpt && <p class="bc-excerpt">{excerpt}</p>}
 
   {tags.length > 0 && (
-    <div class="card-tags">
-      {tags.map(tag => <TagPill label={tag} />)}
+    <div class="bc-tags">
+      {tags.map(tag => <span class="bc-tag">{tag}</span>)}
     </div>
   )}
 </article>
 
 <style>
   .blog-card {
-    padding: 1.25rem 0.75rem;
-    margin-left: -0.75rem;
-    border-bottom: 1px solid var(--color-border);
-    border-radius: 4px;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    transition: background 0.15s ease, padding-left 0.15s ease;
+    gap: 0.55rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: padding-left 0.18s ease;
+  }
+
+  .blog-card:first-child {
+    border-top: 1px solid var(--color-border);
   }
 
   .blog-card:hover {
-    background: var(--color-surface);
-    padding-left: 1rem;
+    padding-left: 0.4rem;
   }
 
-  .card-top {
+  .bc-top {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -58,34 +57,51 @@ const formattedDate = date.toLocaleDateString('en-US', {
     flex-wrap: wrap;
   }
 
-  .card-title {
-    font-size: 1rem;
-    font-weight: 500;
+  .bc-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--color-text);
     transition: color 0.15s ease;
-    font-family: 'Syne', sans-serif;
+    line-height: 1.3;
   }
 
-  .card-title:hover {
+  .bc-title:hover {
     color: var(--color-accent);
   }
 
-  .card-date {
-    font-size: 0.75rem;
+  .bc-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.67rem;
     color: var(--color-muted);
     white-space: nowrap;
     flex-shrink: 0;
   }
 
-  .card-excerpt {
-    font-size: 0.85rem;
+  .bc-excerpt {
+    font-size: 0.82rem;
     color: var(--color-muted);
     line-height: 1.6;
+    margin: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
-  .card-tags {
+  .bc-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    gap: 0.35rem;
+  }
+
+  .bc-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.63rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--color-accent-dim);
+    color: var(--color-accent);
+    border: 1px solid rgba(126, 255, 245, 0.18);
+    border-radius: 3px;
   }
 </style>

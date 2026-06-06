@@ -1,26 +1,28 @@
 ---
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <footer>
   <div class="footer-inner">
-    <span>Built by Obada Daghlas</span>
-    <span class="sep">·</span>
-    <a href="https://github.com/obadaDeg" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-    <span class="sep">·</span>
-    <a href="https://linkedin.com/in/obadadaghlas" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-    <span class="sep">·</span>
-    <a href="mailto:obada.daghlas.dev@gmail.com">Email ↗</a>
-    <span class="sep">·</span>
-    <span>© {year}</span>
+    <div class="footer-left">
+      <a href={base} class="footer-brand">Obada Daghlas</a>
+      <span class="footer-tagline">Cybersecurity · Software Engineering</span>
+    </div>
+    <nav class="footer-links">
+      <a href="https://github.com/obadaDeg" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a href="https://linkedin.com/in/obadadaghlas" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <a href="mailto:obada.daghlas.dev@gmail.com">Email ↗</a>
+    </nav>
+    <span class="footer-copy">© {year}</span>
   </div>
 </footer>
 
 <style>
   footer {
     border-top: 1px solid var(--color-border);
-    padding: 1.5rem 1rem;
-    margin-top: 4rem;
+    padding: 1.75rem 1.5rem;
+    margin-top: 5rem;
   }
 
   .footer-inner {
@@ -28,22 +30,63 @@ const year = new Date().getFullYear();
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--color-muted);
+    gap: 2rem;
     flex-wrap: wrap;
   }
 
-  .sep {
-    opacity: 0.4;
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 0;
   }
 
-  a {
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--color-text);
+    transition: color 0.15s ease;
+  }
+
+  .footer-brand:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--color-muted);
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.78rem;
     color: var(--color-muted);
     transition: color 0.15s ease;
   }
 
-  a:hover {
+  .footer-links a:hover {
     color: var(--color-accent);
+  }
+
+  .footer-copy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--color-muted);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 600px) {
+    .footer-inner { gap: 1.25rem; }
+    .footer-links { gap: 1rem; }
   }
 </style>

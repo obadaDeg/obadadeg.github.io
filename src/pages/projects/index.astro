@@ -3,21 +3,31 @@ import Page from '@layouts/Page.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
-const allProjects = await getCollection('projects', p => !p.data.draft);
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const allProjects = await getCollection('projects', p => !p.data.draft);
 const projects = allProjects.sort((a, b) =>
   b.data.date.getTime() - a.data.date.getTime()
 );
+
+const featuredCount = projects.filter(p => p.data.featured).length;
 ---
 
-<Page title="Projects">
-  <section>
-    <h1 class="page-title">Projects</h1>
-    <p class="page-sub">
-      A selection of things I've built — backend services, APIs, and tools.
-    </p>
+<Page title="Projects" description="A selection of things built by Obada Daghlas — backend services, APIs, and tools.">
+  <div class="ph">
+    <span class="ph-eyebrow">SYS::PROJECTS</span>
+    <h1 class="ph-title">Projects</h1>
+    <p class="ph-sub">Backend services, APIs, security tools, and full-stack applications.</p>
+    {projects.length > 0 && (
+      <span class="ph-stat">
+        {projects.length} {projects.length === 1 ? 'project' : 'projects'}
+        {featuredCount > 0 && ` · ${featuredCount} featured`}
+      </span>
+    )}
+  </div>
 
-    <div class="projects-grid animate-on-scroll">
+  {projects.length > 0 ? (
+    <div class="proj-grid animate-on-scroll">
       {projects.map(project => (
         <ProjectCard
           title={project.data.title}
@@ -30,39 +40,25 @@ const projects = allProjects.sort((a, b) =>
         />
       ))}
     </div>
-
-    {projects.length === 0 && (
-      <p class="empty-state">No projects yet — check back soon.</p>
-    )}
-  </section>
+  ) : (
+    <p class="empty-msg">No projects yet — check back soon.</p>
+  )}
 </Page>
 
 <style>
-  .page-title {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .page-sub {
-    color: var(--color-muted);
-    margin-bottom: 2.5rem;
-    font-size: 0.9rem;
-  }
-
-  .projects-grid {
+  .proj-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   @media (max-width: 640px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
+    .proj-grid { grid-template-columns: 1fr; }
   }
 
-  .empty-state {
+  .empty-msg {
     color: var(--color-muted);
     font-style: italic;
+    font-size: 0.875rem;
   }
 </style>

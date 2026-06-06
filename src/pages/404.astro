@@ -1,20 +1,21 @@
 ---
 import Base from '@layouts/Base.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <Base title="404 — Page Not Found">
-  <main class="not-found">
-    <div class="content">
-      <span class="code">404</span>
-      <h1>Page not found</h1>
-      <p>This page doesn't exist or has been moved.</p>
-      <a href="/" class="home-link">← Back to Home</a>
+  <main class="nf">
+    <div class="nf-inner">
+      <p class="nf-eyebrow">SYS::ERROR</p>
+      <h1 class="nf-code" data-text="404">404</h1>
+      <p class="nf-msg">This page doesn't exist or has been moved.</p>
+      <a href={base} class="nf-back">← Back to home</a>
     </div>
   </main>
 </Base>
 
 <style>
-  .not-found {
+  .nf {
     min-height: calc(100vh - 120px);
     display: flex;
     align-items: center;
@@ -22,39 +23,93 @@ import Base from '@layouts/Base.astro';
     padding: 2rem;
   }
 
-  .content {
+  .nf-inner {
     text-align: center;
+    animation: fade-up 0.5s ease 0.1s both;
   }
 
-  .code {
-    display: block;
-    font-family: 'Syne', sans-serif;
-    font-size: 6rem;
-    font-weight: 700;
+  .nf-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
     color: var(--color-accent);
-    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.65;
     margin-bottom: 1rem;
-    opacity: 0.15;
   }
 
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+  .nf-code {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(5rem, 15vw, 9rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+    margin-bottom: 1.25rem;
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    letter-spacing: -0.03em;
   }
 
-  p {
-    color: var(--color-muted);
-    margin-bottom: 2rem;
-    font-size: 0.9rem;
+  /* Glitch layers */
+  .nf-code::before,
+  .nf-code::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
   }
 
-  .home-link {
+  .nf-code::before {
+    color: #ff3a5c;
+    opacity: 0;
+    animation: nf-glitch-a 4s steps(1) infinite 1s;
+  }
+
+  .nf-code::after {
     color: var(--color-accent);
-    font-size: 0.9rem;
-    transition: opacity 0.15s ease;
+    opacity: 0;
+    animation: nf-glitch-b 4s steps(1) infinite 1.15s;
   }
 
-  .home-link:hover {
-    opacity: 0.8;
+  @keyframes nf-glitch-a {
+    0%, 90%, 100% { opacity: 0; }
+    92% { opacity: 0.7; clip-path: inset(20% 0 60% 0); transform: skewX(-4deg) translateX(4px); }
+    94% { opacity: 0.7; clip-path: inset(55% 0 20% 0); transform: skewX(3deg) translateX(-3px); }
+    96% { opacity: 0.7; clip-path: inset(70% 0 5% 0);  transform: skewX(-2deg) translateX(2px); }
+  }
+
+  @keyframes nf-glitch-b {
+    0%, 90%, 100% { opacity: 0; }
+    92% { opacity: 0.6; clip-path: inset(5% 0 75% 0);  transform: skewX(4deg) translateX(-4px); }
+    94% { opacity: 0.6; clip-path: inset(40% 0 40% 0); transform: skewX(-3deg) translateX(3px); }
+    96% { opacity: 0.6; clip-path: inset(75% 0 10% 0); transform: skewX(2deg) translateX(-2px); }
+  }
+
+  .nf-msg {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .nf-back {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .nf-back:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background: var(--color-accent-dim);
   }
 </style>

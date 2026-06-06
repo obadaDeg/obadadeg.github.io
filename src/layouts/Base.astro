@@ -39,6 +39,7 @@ const fullTitle = title === 'Obada Daghlas' ? title : `${title} — Obada Daghla
   </head>
   <body>
     <Nav />
+    <div id="pg-bar" class="pg-bar" aria-hidden="true"></div>
     <slot />
     <Footer />
     <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
@@ -89,7 +90,19 @@ const fullTitle = title === 'Obada Daghlas' ? title : `${title} — Obada Daghla
       });
     }
 
+    function initScrollBar() {
+      const bar = document.getElementById('pg-bar');
+      if (!bar) return;
+      const update = () => {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        bar.style.width = `${Math.min(scrollTop / Math.max(1, scrollHeight - clientHeight) * 100, 100)}%`;
+      };
+      window.addEventListener('scroll', update, { passive: true });
+      document.addEventListener('astro:before-swap', () => window.removeEventListener('scroll', update), { once: true });
+    }
+
     document.addEventListener('astro:page-load', initScrollAnimations);
     document.addEventListener('astro:page-load', initCursor);
+    document.addEventListener('astro:page-load', initScrollBar);
   </script>
 </html>

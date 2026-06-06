@@ -1,0 +1,628 @@
+---
+// Interactive Min-Heap Visualizer
+// Drop into any MDX blog post with <MinHeapVisualizer />
+---
+
+<div class="mhv" id="mhv">
+  <!-- ── Header / Controls ── -->
+  <div class="mhv-header">
+    <div class="mhv-title-row">
+      <span class="mhv-badge">INTERACTIVE</span>
+      <span class="mhv-title">Min-Heap Visualizer</span>
+    </div>
+    <div class="mhv-controls">
+      <div class="mhv-insert-group">
+        <input
+          id="mhv-val"
+          class="mhv-input"
+          type="number"
+          placeholder="1–99"
+          min="1"
+          max="99"
+          aria-label="Value to insert"
+        />
+        <button id="mhv-insert" class="mhv-btn mhv-btn--accent">Insert</button>
+      </div>
+      <button id="mhv-extract" class="mhv-btn">Extract Min</button>
+      <button id="mhv-fill" class="mhv-btn">Quick Fill</button>
+      <button id="mhv-reset" class="mhv-btn mhv-btn--muted">Reset</button>
+    </div>
+  </div>
+
+  <!-- ── Tree SVG ── -->
+  <div class="mhv-tree-wrap">
+    <svg
+      id="mhv-svg"
+      class="mhv-svg"
+      viewBox="0 0 800 310"
+      preserveAspectRatio="xMidYMid meet"
+      aria-label="Min-heap binary tree visualization"
+    >
+      <defs>
+        <filter id="mhv-glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <text
+        id="mhv-empty-msg"
+        x="400" y="155"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        fill="#6b6b80"
+        font-size="13"
+        font-family="IBM Plex Mono, monospace"
+      >Insert values to build the heap</text>
+      <g id="mhv-edges"></g>
+      <g id="mhv-nodes"></g>
+    </svg>
+  </div>
+
+  <!-- ── Array view ── -->
+  <div class="mhv-array-wrap">
+    <span class="mhv-array-label">Array <span class="mhv-array-note">(1-indexed · index 0 unused)</span></span>
+    <div class="mhv-arr-diagram">
+      <div class="mhv-arr-indices" id="mhv-arr-indices">
+        <span class="mhv-arr-idx mhv-arr-idx--dummy">0</span>
+      </div>
+      <div class="mhv-arr-cells" id="mhv-arr-cells">
+        <div class="mhv-arr-cell mhv-arr-cell--dummy">_</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Operation log ── -->
+  <div class="mhv-log">
+    <span class="mhv-log-chevron">›</span>
+    <span id="mhv-log-msg">Insert a value or use Quick Fill to start.</span>
+  </div>
+</div>
+
+<style>
+  .mhv {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-surface);
+    margin: 2.5rem 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+  }
+
+  .mhv-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(0,0,0,0.25);
+  }
+
+  .mhv-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* Amber accent distinguishes min from max at a glance */
+  .mhv-badge {
+    font-size: 0.52rem;
+    letter-spacing: 0.14em;
+    padding: 0.12rem 0.45rem;
+    background: rgba(251,191,36,0.12);
+    color: #fbbf24;
+    border: 1px solid rgba(251,191,36,0.28);
+    border-radius: 3px;
+  }
+
+  .mhv-title {
+    font-size: 0.75rem;
+    color: var(--color-text);
+    letter-spacing: 0.04em;
+  }
+
+  .mhv-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+  }
+
+  .mhv-insert-group { display: flex; gap: 0.35rem; }
+
+  .mhv-input {
+    width: 72px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    padding: 0.28rem 0.5rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .mhv-input:focus { border-color: #fbbf24; }
+
+  .mhv-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.28rem 0.7rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-muted);
+    transition: all 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .mhv-btn:hover:not(:disabled) {
+    border-color: #fbbf24;
+    color: #fbbf24;
+  }
+
+  .mhv-btn--accent {
+    border-color: #fbbf24;
+    color: #fbbf24;
+    background: rgba(251,191,36,0.1);
+  }
+
+  .mhv-btn--accent:hover:not(:disabled) {
+    background: #fbbf24 !important;
+    color: #0a0a0f !important;
+  }
+
+  .mhv-btn--muted:hover:not(:disabled) {
+    border-color: #ff3a5c;
+    color: #ff3a5c;
+  }
+
+  .mhv-btn:disabled { opacity: 0.38; cursor: not-allowed; }
+
+  .mhv-tree-wrap {
+    padding: 0.5rem 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mhv-svg { width: 100%; display: block; }
+
+  .mhv-array-wrap {
+    padding: 0.85rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mhv-array-label {
+    font-size: 0.58rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .mhv-array-note {
+    font-size: 0.54rem;
+    opacity: 0.55;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .mhv-arr-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow-x: auto;
+    mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+    padding: 0 2px;
+  }
+
+  .mhv-arr-indices {
+    display: flex;
+    padding-bottom: 0.25rem;
+  }
+
+  .mhv-arr-cells {
+    display: flex;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  /* JS-created elements — must be :global */
+  :global(.mhv-arr-idx) {
+    width: 40px;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 0.58rem;
+    color: var(--color-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    transition: color 0.2s;
+  }
+
+  :global(.mhv-arr-idx--dummy)   { color: rgba(107,107,128,0.4); }
+  :global(.mhv-arr-idx--active)  { color: #fbbf24; }
+  :global(.mhv-arr-idx--swap)    { color: #ff3a5c; }
+  :global(.mhv-arr-idx--settled) { color: #4ade80; }
+
+  :global(.mhv-arr-cell) {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border-right: 1px solid var(--color-border);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  :global(.mhv-arr-cell:last-child) { border-right: none; }
+
+  :global(.mhv-arr-cell--dummy) {
+    color: var(--color-muted);
+    opacity: 0.38;
+    font-size: 1.1rem;
+  }
+
+  :global(.mhv-arr-cell--active) {
+    background: rgba(251,191,36,0.1);
+    color: #fbbf24;
+    border-right-color: rgba(251,191,36,0.25);
+  }
+
+  :global(.mhv-arr-cell--swap) {
+    background: rgba(255,58,92,0.12);
+    color: #ff3a5c;
+    border-right-color: rgba(255,58,92,0.25);
+  }
+
+  :global(.mhv-arr-cell--settled) {
+    background: rgba(74,222,128,0.1);
+    color: #4ade80;
+    border-right-color: rgba(74,222,128,0.25);
+  }
+
+  .mhv-log {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 1.25rem;
+    min-height: 2.4rem;
+  }
+
+  .mhv-log-chevron {
+    color: #fbbf24;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  #mhv-log-msg {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    transition: color 0.2s;
+    line-height: 1.4;
+  }
+
+  #mhv-log-msg.mhv-log--active { color: var(--color-text); }
+  #mhv-log-msg.mhv-log--warn   { color: #facc15; }
+</style>
+
+<script>
+(function () {
+  const SVG_W     = 800;
+  const NODE_R    = 22;
+  const LEVEL_H   = 76;
+  const TOP_PAD   = 44;
+  const STEP_MS   = 580;
+  const MAX_NODES = 15;
+
+  const COL = {
+    bg:      '#0a0a0f',
+    surface: '#111118',
+    border:  '#1e1e2e',
+    text:    '#e2e2e8',
+    muted:   '#6b6b80',
+    accent:  '#fbbf24',   // amber — min-heap identity colour
+    red:     '#ff3a5c',
+    green:   '#4ade80',
+  };
+
+  let heap: number[] = [0];
+  let animating = false;
+
+  const edgesG     = document.getElementById('mhv-edges')!;
+  const nodesG     = document.getElementById('mhv-nodes')!;
+  const emptyMsg   = document.getElementById('mhv-empty-msg')!;
+  const arrIndices = document.getElementById('mhv-arr-indices')!;
+  const arrCells   = document.getElementById('mhv-arr-cells')!;
+  const logMsg     = document.getElementById('mhv-log-msg')!;
+  const insertBtn  = document.getElementById('mhv-insert')  as HTMLButtonElement;
+  const extractBtn = document.getElementById('mhv-extract') as HTMLButtonElement;
+  const fillBtn    = document.getElementById('mhv-fill')    as HTMLButtonElement;
+  const resetBtn   = document.getElementById('mhv-reset')   as HTMLButtonElement;
+  const valInput   = document.getElementById('mhv-val')     as HTMLInputElement;
+
+  const ns    = 'http://www.w3.org/2000/svg';
+  const svgEl = (tag: string) => document.createElementNS(ns, tag);
+
+  function nodePos(i: number) {
+    const level       = Math.floor(Math.log2(i));
+    const posInLevel  = i - Math.pow(2, level);
+    const totalAtLevel = Math.pow(2, level);
+    const spacing = SVG_W / totalAtLevel;
+    return { x: spacing * posInLevel + spacing / 2, y: TOP_PAD + level * LEVEL_H };
+  }
+
+  function render(highlights: Record<number, 'active' | 'swap' | 'settled'> = {}) {
+    const n = heap.length - 1;
+    edgesG.innerHTML = '';
+    nodesG.innerHTML = '';
+    emptyMsg.style.display = n === 0 ? 'block' : 'none';
+
+    // Edges
+    for (let i = 2; i <= n; i++) {
+      const par = Math.floor(i / 2);
+      const p1 = nodePos(par), p2 = nodePos(i);
+      const line = svgEl('line');
+      line.setAttribute('x1', String(p1.x)); line.setAttribute('y1', String(p1.y));
+      line.setAttribute('x2', String(p2.x)); line.setAttribute('y2', String(p2.y));
+      line.setAttribute('stroke', COL.border); line.setAttribute('stroke-width', '1.5');
+      edgesG.appendChild(line);
+    }
+
+    // Nodes
+    for (let i = 1; i <= n; i++) {
+      const { x, y } = nodePos(i);
+      const h = highlights[i];
+
+      const fill   = h === 'active'  ? 'rgba(251,191,36,0.13)'
+                   : h === 'swap'    ? 'rgba(255,58,92,0.14)'
+                   : h === 'settled' ? 'rgba(74,222,128,0.11)'
+                   : COL.surface;
+      const stroke = h === 'active'  ? COL.accent
+                   : h === 'swap'    ? COL.red
+                   : h === 'settled' ? COL.green
+                   : COL.border;
+      const textCol = h ? stroke : COL.text;
+
+      const g = svgEl('g') as SVGGElement;
+      if (h === 'active' || h === 'swap') g.setAttribute('filter', 'url(#mhv-glow)');
+
+      const circle = svgEl('circle');
+      circle.setAttribute('cx', String(x)); circle.setAttribute('cy', String(y));
+      circle.setAttribute('r', String(NODE_R));
+      circle.setAttribute('fill', fill); circle.setAttribute('stroke', stroke);
+      circle.setAttribute('stroke-width', '1.5');
+
+      const label = svgEl('text') as SVGTextElement;
+      label.setAttribute('x', String(x)); label.setAttribute('y', String(y + 1));
+      label.setAttribute('text-anchor', 'middle'); label.setAttribute('dominant-baseline', 'middle');
+      label.setAttribute('fill', textCol); label.setAttribute('font-size', '12');
+      label.setAttribute('font-family', 'IBM Plex Mono, monospace'); label.setAttribute('font-weight', '600');
+      label.textContent = String(heap[i]);
+
+      const idx = svgEl('text') as SVGTextElement;
+      idx.setAttribute('x', String(x)); idx.setAttribute('y', String(y + NODE_R + 10));
+      idx.setAttribute('text-anchor', 'middle'); idx.setAttribute('dominant-baseline', 'middle');
+      idx.setAttribute('fill', COL.muted); idx.setAttribute('font-size', '8.5');
+      idx.setAttribute('font-family', 'IBM Plex Mono, monospace');
+      idx.textContent = `[${i}]`;
+
+      g.appendChild(circle); g.appendChild(label); g.appendChild(idx);
+      nodesG.appendChild(g);
+    }
+
+    // Array diagram
+    arrIndices.innerHTML = '<span class="mhv-arr-idx mhv-arr-idx--dummy">0</span>';
+    arrCells.innerHTML   = '<div class="mhv-arr-cell mhv-arr-cell--dummy">_</div>';
+
+    for (let i = 1; i <= n; i++) {
+      const h = highlights[i];
+
+      const idxEl = document.createElement('span');
+      idxEl.className = `mhv-arr-idx${h ? ' mhv-arr-idx--' + h : ''}`;
+      idxEl.textContent = String(i);
+      arrIndices.appendChild(idxEl);
+
+      const cell = document.createElement('div');
+      cell.className = `mhv-arr-cell${h ? ' mhv-arr-cell--' + h : ''}`;
+      cell.textContent = String(heap[i]);
+      arrCells.appendChild(cell);
+    }
+  }
+
+  function log(text: string, type: 'normal' | 'active' | 'warn' = 'normal') {
+    logMsg.textContent = text;
+    logMsg.className = type === 'active' ? 'mhv-log--active'
+                     : type === 'warn'   ? 'mhv-log--warn'
+                     : '';
+  }
+
+  function setButtons(disabled: boolean) {
+    insertBtn.disabled  = disabled;
+    extractBtn.disabled = disabled;
+    fillBtn.disabled    = disabled;
+    resetBtn.disabled   = disabled;
+  }
+
+  const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, ms));
+
+  interface Step {
+    heap: number[];
+    hi: Record<number, 'active' | 'swap' | 'settled'>;
+    msg: string;
+    type?: 'normal' | 'active' | 'warn';
+  }
+
+  async function runSteps(steps: Step[]) {
+    animating = true;
+    setButtons(true);
+    for (const s of steps) {
+      heap = s.heap;
+      render(s.hi);
+      log(s.msg, s.type ?? 'active');
+      await sleep(STEP_MS);
+    }
+    render({});
+    animating = false;
+    setButtons(false);
+  }
+
+  /* ── Insert (bubble up: swap when child < parent) ── */
+  function buildInsertSteps(val: number): Step[] {
+    const steps: Step[] = [];
+    const h = [...heap];
+    h.push(val);
+    const newIdx = h.length - 1;
+
+    steps.push({ heap: [...h], hi: { [newIdx]: 'active' },
+      msg: `Appending ${val} at index [${newIdx}] — end of array` });
+
+    let i = newIdx;
+    while (i > 1) {
+      const par = Math.floor(i / 2);
+      steps.push({ heap: [...h], hi: { [i]: 'active', [par]: 'active' },
+        msg: `Compare heap[${i}]=${h[i]} with parent heap[${par}]=${h[par]}` });
+
+      if (h[i] < h[par]) {                       // ← MIN: swap when child is SMALLER
+        [h[i], h[par]] = [h[par], h[i]];
+        steps.push({ heap: [...h], hi: { [i]: 'swap', [par]: 'swap' },
+          msg: `${h[par]} < ${h[i]}  →  swap ↑  (bubble up)` });
+        i = par;
+      } else {
+        steps.push({ heap: [...h], hi: { [i]: 'settled' },
+          msg: `${h[i]} ≥ parent ${h[par]}  →  heap property satisfied ✓` });
+        return steps;
+      }
+    }
+
+    steps.push({ heap: [...h], hi: { [1]: 'settled' },
+      msg: `${h[1]} reached root  →  done. Heap size: ${h.length - 1}` });
+    return steps;
+  }
+
+  /* ── Extract Min (bubble down: swap with SMALLEST child) ── */
+  function buildExtractSteps(): Step[] {
+    const steps: Step[] = [];
+    const h = [...heap];
+    const n = h.length - 1;
+    const minVal = h[1];
+
+    steps.push({ heap: [...h], hi: { [1]: 'active' },
+      msg: `Root is the minimum: ${minVal}` });
+
+    h[1] = h[n];
+    h.pop();
+    const newN = h.length - 1;
+
+    if (newN === 0) {
+      steps.push({ heap: [...h], hi: {},
+        msg: `Heap is now empty after removing ${minVal}.`, type: 'warn' });
+      return steps;
+    }
+
+    steps.push({ heap: [...h], hi: { [1]: 'swap' },
+      msg: `Move last element (${h[1]}) to root  →  bubble down` });
+
+    let i = 1;
+    while (true) {
+      const l = 2 * i, r = 2 * i + 1;
+      let smallest = i;                           // ← MIN: track smallest, not largest
+      if (l <= newN && h[l] < h[smallest]) smallest = l;
+      if (r <= newN && h[r] < h[smallest]) smallest = r;
+
+      if (smallest === i) {
+        steps.push({ heap: [...h], hi: { [i]: 'settled' },
+          msg: `${h[i]} ≤ both children  →  heap property restored ✓  (extracted: ${minVal})` });
+        break;
+      }
+
+      const hi: Record<number, 'active'> = { [i]: 'active' };
+      if (l <= newN) hi[l] = 'active';
+      if (r <= newN) hi[r] = 'active';
+      steps.push({ heap: [...h], hi,
+        msg: `Compare [${i}]=${h[i]} with children → smaller child is [${smallest}]=${h[smallest]}` });
+
+      [h[i], h[smallest]] = [h[smallest], h[i]];
+      steps.push({ heap: [...h], hi: { [i]: 'swap', [smallest]: 'swap' },
+        msg: `Swap ${h[smallest]} ↔ ${h[i]}  (bubble down)` });
+
+      i = smallest;
+    }
+
+    return steps;
+  }
+
+  /* ── Event handlers ── */
+  insertBtn.addEventListener('click', () => {
+    if (animating) return;
+    const val = parseInt(valInput.value);
+    if (isNaN(val) || val < 1 || val > 99) { log('Enter a number between 1 and 99.', 'warn'); return; }
+    if (heap.length - 1 >= MAX_NODES) { log(`Max ${MAX_NODES} nodes for this visualization.`, 'warn'); return; }
+    valInput.value = '';
+    valInput.focus();
+    runSteps(buildInsertSteps(val)).then(() => {
+      log(`Inserted ${val}. Heap size: ${heap.length - 1}.`);
+    });
+  });
+
+  valInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') insertBtn.click(); });
+
+  extractBtn.addEventListener('click', () => {
+    if (animating) return;
+    if (heap.length <= 1) { log('Heap is empty.', 'warn'); return; }
+    const minVal = heap[1];
+    runSteps(buildExtractSteps()).then(() => {
+      log(`Extracted min: ${minVal}. New root: ${heap[1] ?? 'none'}.`);
+    });
+  });
+
+  fillBtn.addEventListener('click', async () => {
+    if (animating) return;
+    heap = [0];
+    render({});
+    const vals = [42, 15, 67, 8, 33, 91, 20];
+    setButtons(true);
+    animating = true;
+    for (const v of vals) {
+      if (heap.length - 1 >= MAX_NODES) break;
+      const steps = buildInsertSteps(v);
+      for (const s of steps) {
+        heap = s.heap;
+        render(s.hi);
+        log(s.msg, 'active');
+        await sleep(STEP_MS * 0.55);
+      }
+      render({});
+      await sleep(180);
+    }
+    log(`Quick fill complete. Heap has ${heap.length - 1} nodes. Try Extract Min!`);
+    animating = false;
+    setButtons(false);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (animating) return;
+    heap = [0];
+    render({});
+    log('Heap cleared.', 'warn');
+  });
+
+  render({});
+})();
+</script>

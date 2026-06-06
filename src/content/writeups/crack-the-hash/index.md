@@ -2,7 +2,7 @@
 title: "TryHackMe — Crack the Hash"
 ctf: "TryHackMe"
 category: "Crypto"
-difficulty: "Medium"
+difficulty: "Easy"
 date: 2026-06-06
 tags: ["hash-cracking", "hashcat", "md5", "sha1", "sha256", "bcrypt", "ntlm", "rockyou"]
 excerpt: "A two-level hash cracking challenge covering MD5, SHA-1, SHA-256, bcrypt, NTLM, and salted variants — using online tools for the simple ones and Hashcat with rockyou.txt for the rest."

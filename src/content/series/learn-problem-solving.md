@@ -5,6 +5,8 @@ draft: false
 items:
   - collection: blog
     slug: grid-equalization-quickselect
+  - collection: blog
+    slug: understanding-heaps
 ---
 
 This series covers standalone algorithm deep-dives and competitive programming problems outside the LeetCode DSA Quest — problems that introduce a single technique cleanly and are worth studying in isolation.

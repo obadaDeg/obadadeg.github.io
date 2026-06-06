@@ -1,0 +1,487 @@
+---
+title: "Understanding Heaps: Trees, Arrays, and Priority Queues"
+date: 2026-06-07
+tags: ["algorithms", "data-structures", "heap", "typescript"]
+excerpt: "A ground-up tour of the heap data structure — from binary tree rules and array indexing to insertion, deletion, heapify, and heap sort — based on Abdul Bari's lectures."
+draft: false
+series: "learn-problem-solving"
+---
+
+import HeapVisualizer from '@components/viz/HeapVisualizer.astro';
+
+I spent a few days working through Abdul Bari's heap lectures and wanted to write everything down in one place before it fades. This is that post — the heap data structure from first principles: what it is, how it's stored, how it changes, and what it's used for.
+
+Reference: [Abdul Bari — Heap Sort (YouTube)](https://www.youtube.com/watch?v=HqPJF2L5h9U)
+
+---
+
+## Trees First: Full and Complete
+
+A heap is a binary tree, but not just any binary tree. It has two structural requirements.
+
+### Full Binary Tree
+
+Every node has either **0 or 2 children** — no node has exactly one child.
+
+```
+       1
+      / \
+     2   3
+    / \
+   4   5
+```
+
+Node 2 has two children ✓. Node 3 has zero ✓. This is a full binary tree.
+
+### Complete Binary Tree
+
+All levels are **fully filled except possibly the last**, and the last level is filled **strictly left to right** — no gaps.
+
+```
+       1
+      / \
+     2   3
+    / \ /
+   4  5 6
+```
+
+All levels filled except the last, which fills left to right ✓.
+
+This is NOT complete:
+
+```
+       1
+      / \
+     2   3
+    /     \
+   4       7   ← gap: 4 has no right sibling before 7 is placed
+```
+
+**A heap must be a complete binary tree.** The reason becomes clear once you see the array representation.
+
+---
+
+## Array Representation
+
+Instead of allocating nodes with left/right pointers, a heap stores the tree level by level in an array — root first, then its children, then their children, and so on.
+
+Take this max-heap:
+
+```
+          50
+         /  \
+        30   40
+       / \  /
+      10 15 20
+```
+
+Reading level by level gives: `[_, 50, 30, 40, 10, 15, 20]`
+
+I use **1-indexed** arrays. Index 0 holds a dummy value (or is unused). The reason: the parent/child arithmetic is cleaner.
+
+For any node at index `i`:
+
+```
+Parent:      floor(i / 2)
+Left child:  2 * i
+Right child: 2 * i + 1
+```
+
+Check it:
+- Node 50 is at index 1. Its children are at 2 (30) and 3 (40) ✓
+- Node 30 is at index 2. Its parent is at `floor(2/2) = 1` (50) ✓
+- Node 10 is at index 4. Its parent is at `floor(4/2) = 2` (30) ✓
+
+This only works cleanly when the tree is **complete** — completeness guarantees there are no gaps in the array, and every index relationship holds without needing null checks for missing nodes.
+
+---
+
+## Max-Heap vs Min-Heap
+
+### Max-Heap
+
+The **parent is always greater than or equal to both children**. The root is the maximum element.
+
+```
+          50
+         /  \
+        30   40
+       / \  /
+      10 15 20
+```
+
+`50 ≥ 30`, `50 ≥ 40`, `30 ≥ 10`, `30 ≥ 15`, `40 ≥ 20` ✓
+
+### Min-Heap
+
+The **parent is always less than or equal to both children**. The root is the minimum element.
+
+```
+          5
+         / \
+        10   8
+       / \  /
+      20 15 12
+```
+
+`5 ≤ 10`, `5 ≤ 8`, `10 ≤ 20`, `10 ≤ 15`, `8 ≤ 12` ✓
+
+**The heap property says nothing about the relationship between siblings** — in a max-heap, the left child can be smaller or larger than the right child. The only enforced relationship is parent → children.
+
+---
+
+## Insertion
+
+Always insert at the **end of the array** (the next available slot in the last level, left to right), then restore the heap property by **bubbling up**.
+
+### Example: Insert 35 into this max-heap
+
+```
+Before:
+          50
+         /  \
+        30   40
+       / \
+      10  15
+
+Array: [_, 50, 30, 40, 10, 15]
+```
+
+**Step 1**: Append 35 at index 6.
+
+```
+          50
+         /  \
+        30   40
+       / \ /
+      10 15 35
+
+Array: [_, 50, 30, 40, 10, 15, 35]
+```
+
+**Step 2**: Bubble up — compare 35 with its parent at `floor(6/2) = 3` (which is 40).
+
+`35 < 40` — heap property satisfied. Done.
+
+```
+Result:
+          50
+         /  \
+        30   40
+       / \ /
+      10 15 35
+```
+
+### Example: Insert 45
+
+Start from the same heap. Append 45 at index 7.
+
+```
+Array: [_, 50, 30, 40, 10, 15, 35, 45]
+```
+
+Parent of 7 is `floor(7/2) = 3` → value 40. `45 > 40` → **swap**.
+
+```
+Array: [_, 50, 30, 45, 10, 15, 35, 40]
+```
+
+Now 45 is at index 3. Parent is `floor(3/2) = 1` → value 50. `45 < 50` → done.
+
+```
+Result:
+          50
+         /  \
+        30   45
+       / \ / \
+      10 15 35 40
+```
+
+**Complexity**: O(log n) — we walk at most one path from leaf to root, and the height of a complete binary tree with n nodes is floor(log₂ n).
+
+<HeapVisualizer />
+
+### TypeScript
+
+```typescript
+class MaxHeap {
+  private heap: number[] = [0]; // 1-indexed
+
+  private parent(i: number) { return Math.floor(i / 2); }
+  private left(i: number)   { return 2 * i; }
+  private right(i: number)  { return 2 * i + 1; }
+
+  private swap(i: number, j: number) {
+    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+  }
+
+  insert(val: number): void {
+    this.heap.push(val);
+    let i = this.heap.length - 1;
+    while (i > 1 && this.heap[i] > this.heap[this.parent(i)]) {
+      this.swap(i, this.parent(i));
+      i = this.parent(i);
+    }
+  }
+
+  size(): number { return this.heap.length - 1; }
+}
+```
+
+---
+
+## Deletion
+
+In a heap, **you only ever delete the root** — because that's the only element you can guarantee is the max (or min). Deleting an arbitrary node would require a search first, breaking the O(log n) guarantee.
+
+**The procedure:**
+1. Save the root value.
+2. Move the **last element** to the root.
+3. Remove the last element.
+4. **Bubble down** — swap the root with its larger child repeatedly until the heap property is restored.
+
+### Example: Delete root from this max-heap
+
+```
+          50
+         /  \
+        30   45
+       / \ / \
+      10 15 35 40
+```
+
+**Step 1**: Save 50. Move last element (40) to root.
+
+```
+          40
+         /  \
+        30   45
+       / \ /
+      10 15 35
+```
+
+**Step 2**: Bubble down 40. Its children are 30 (left) and 45 (right). Larger child is 45. `40 < 45` → swap.
+
+```
+          45
+         /  \
+        30   40
+       / \ /
+      10 15 35
+```
+
+40 is now at index 3. Its children are at index 6 (35) and index 7 (doesn't exist). `40 > 35` → done.
+
+```
+Result:
+          45
+         /  \
+        30   40
+       / \ /
+      10 15 35
+```
+
+**Critical rule**: always swap with the **larger** of the two children. Swapping with the smaller child would violate the heap property at the next level.
+
+### TypeScript
+
+```typescript
+extractMax(): number {
+  if (this.size() === 0) throw new Error('Heap is empty');
+  const max = this.heap[1];
+  this.heap[1] = this.heap[this.heap.length - 1];
+  this.heap.pop();
+  this.bubbleDown(1);
+  return max;
+}
+
+private bubbleDown(i: number): void {
+  const n = this.heap.length;
+  let largest = i;
+
+  if (this.left(i) < n && this.heap[this.left(i)] > this.heap[largest])
+    largest = this.left(i);
+
+  if (this.right(i) < n && this.heap[this.right(i)] > this.heap[largest])
+    largest = this.right(i);
+
+  if (largest !== i) {
+    this.swap(i, largest);
+    this.bubbleDown(largest);
+  }
+}
+```
+
+**Complexity**: O(log n) — we walk one path from root to leaf.
+
+---
+
+## Applications
+
+### Heapify — Building a Heap in O(n)
+
+If you have an unsorted array and want to turn it into a heap, you have two options:
+
+**Option A**: Insert each element one by one → O(n log n).
+
+**Option B**: Floyd's heapify — start from the last non-leaf and bubble down every node, working right to left.
+
+```
+Array: [_, 10, 20, 15, 30, 40]
+```
+
+Last non-leaf is at index `floor(n/2) = floor(5/2) = 2` (value 20).
+
+- i=2: Children are 30 (index 4) and 40 (index 5). Largest is 40. Swap 20 ↔ 40.
+- i=1: Children are 40 (now at index 2, wait — recheck after previous swap).
+
+Let me trace it properly:
+
+```
+Start: [_, 10, 20, 15, 30, 40]
+
+i=2 (val=20): children are 30 (idx 4), 40 (idx 5). Swap 20↔40.
+→  [_, 10, 40, 15, 30, 20]
+
+i=1 (val=10): children are 40 (idx 2), 15 (idx 3). Swap 10↔40.
+→  [_, 40, 10, 15, 30, 20]
+   Now bubble down 10 at idx 2: children are 30 (idx 4), 20 (idx 5). Swap 10↔30.
+→  [_, 40, 30, 15, 10, 20]
+
+Final: [_, 40, 30, 15, 10, 20]
+```
+
+```
+     40
+    /  \
+   30   15
+  / \
+ 10  20
+```
+
+**Why is this O(n)?** Most nodes are near the leaves and barely need to bubble down at all. Formally: the work at each level is proportional to the number of nodes at that level times their height, and the sum over all levels converges to O(n). In contrast, building top-down (n insertions) always starts from a large height.
+
+```typescript
+function heapify(arr: number[]): number[] {
+  const heap = [0, ...arr]; // make 1-indexed
+  const n = heap.length - 1;
+
+  for (let i = Math.floor(n / 2); i >= 1; i--) {
+    bubbleDownInPlace(heap, i, n);
+  }
+
+  return heap;
+}
+
+function bubbleDownInPlace(heap: number[], i: number, n: number): void {
+  let largest = i;
+  const l = 2 * i, r = 2 * i + 1;
+
+  if (l <= n && heap[l] > heap[largest]) largest = l;
+  if (r <= n && heap[r] > heap[largest]) largest = r;
+
+  if (largest !== i) {
+    [heap[i], heap[largest]] = [heap[largest], heap[i]];
+    bubbleDownInPlace(heap, largest, n);
+  }
+}
+```
+
+---
+
+### Heap Sort
+
+Heap sort has two phases:
+
+1. **Build a max-heap** from the input array (O(n) with heapify).
+2. **Repeatedly extract the max**, placing it at the end of the array.
+
+```
+Input: [10, 20, 15, 30, 40]
+
+After heapify: [40, 30, 15, 10, 20]  (max-heap)
+
+Iteration 1: Swap heap[1]↔heap[5], reduce heap size by 1.
+             Bubble down root.
+             Array: [30, 20, 15, 10, | 40]
+
+Iteration 2: Swap heap[1]↔heap[4].
+             Array: [20, 10, 15, | 30, 40]
+
+Iteration 3: Swap heap[1]↔heap[3].
+             Array: [15, 10, | 20, 30, 40]
+
+Iteration 4: Swap heap[1]↔heap[2].
+             Array: [10, | 15, 20, 30, 40]
+
+Done: [10, 15, 20, 30, 40]
+```
+
+Each extraction is O(log n), done n times → **O(n log n) total**. In-place: no extra array needed.
+
+```typescript
+function heapSort(arr: number[]): number[] {
+  const n = arr.length;
+  const heap = [0, ...arr]; // 1-indexed copy
+
+  // Build max-heap
+  for (let i = Math.floor(n / 2); i >= 1; i--) {
+    bubbleDownInPlace(heap, i, n);
+  }
+
+  // Extract max repeatedly
+  for (let end = n; end > 1; end--) {
+    [heap[1], heap[end]] = [heap[end], heap[1]];
+    bubbleDownInPlace(heap, 1, end - 1);
+  }
+
+  return heap.slice(1); // remove the dummy index-0
+}
+```
+
+**Heap sort is not stable** (equal elements may change relative order) and has poor cache performance compared to quicksort — but it's the go-to when you need a guaranteed O(n log n) worst case with O(1) extra space.
+
+---
+
+### Priority Queue
+
+A priority queue is an abstract data type that supports two operations:
+
+- `enqueue(val, priority)` — add with a priority
+- `dequeue()` — remove and return the highest-priority element
+
+A heap is the canonical concrete implementation. A max-heap gives you a max-priority queue; a min-heap gives you a min-priority queue.
+
+Real uses:
+- **Dijkstra's algorithm** — always process the unvisited node with the shortest known distance (min-heap).
+- **A* pathfinding** — same idea.
+- **OS task scheduling** — processes have priorities; the scheduler always picks the highest.
+- **Event-driven simulations** — events processed in chronological order (min-heap on timestamp).
+
+In JavaScript/TypeScript, there is no built-in priority queue. When you need one in an interview or in production, you implement it with a heap — exactly what [the Last Stone Weight problem](/blog/lc-quest-dsa-heap) made me do from scratch.
+
+---
+
+## Key Takeaways
+
+- **A heap is a complete binary tree stored as a 1-indexed array.** Completeness is what makes the index arithmetic (`parent = floor(i/2)`, `left = 2i`, `right = 2i+1`) work without gaps or null checks.
+
+- **Max-heap: parent ≥ children. Min-heap: parent ≤ children.** Siblings have no defined relationship.
+
+- **Insertion is O(log n): append + bubble up.** Deletion is O(log n): replace root with last element + bubble down.
+
+- **Bubble down must swap with the larger child**, not just any child that's larger than the current node. Swapping with the smaller one can still violate the invariant at the next level.
+
+- **Heapify (Floyd's algorithm) builds a heap in O(n)** — not O(n log n). This matters when building a heap from an existing array.
+
+- **Heap sort = heapify + n extractions = O(n log n) in-place**, but poor cache performance makes quicksort faster in practice on most architectures.
+
+- **A heap is a priority queue.** Whenever you see "always process the minimum/maximum next," the answer is usually a heap.
+
+| Operation | Time |
+|---|---|
+| Insert | O(log n) |
+| Delete (root) | O(log n) |
+| Peek (root) | O(1) |
+| Build heap (heapify) | O(n) |
+| Heap sort | O(n log n) |

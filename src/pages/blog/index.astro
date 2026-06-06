@@ -1,7 +1,8 @@
 ---
 import Page from '@layouts/Page.astro';
-import BlogCard from '@components/BlogCard.astro';
 import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 const allPosts = await getCollection('blog');
 const posts = allPosts
@@ -10,49 +11,84 @@ const posts = allPosts
 ---
 
 <Page title="Blog" description="Technical writing by Obada Daghlas on security, development, and infrastructure.">
-  <section>
-    <h1 class="page-title">Blog</h1>
-    <p class="page-sub">
-      Technical writing on security, development, and infrastructure.
-    </p>
-
-    {posts.length > 0 ? (
-      <div class="post-list animate-on-scroll">
-        {posts.map(post => (
-          <BlogCard
-            title={post.data.title}
-            date={post.data.date}
-            tags={post.data.tags}
-            excerpt={post.data.excerpt}
-            slug={post.slug}
-          />
-        ))}
-      </div>
-    ) : (
-      <p class="empty-state">No posts yet — check back soon.</p>
+  <div class="ph">
+    <span class="ph-eyebrow">SYS::BLOG</span>
+    <h1 class="ph-title">Blog</h1>
+    <p class="ph-sub">Technical writing on security, development, and infrastructure.</p>
+    {posts.length > 0 && (
+      <span class="ph-stat">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</span>
     )}
-  </section>
+  </div>
+
+  {posts.length > 0 ? (
+    <ul class="el animate-on-scroll">
+      {posts.map(post => (
+        <li class="el-row">
+          <div class="post-main">
+            <a
+              href={`${base}blog/${post.slug}`}
+              class="el-title post-title-link"
+            >{post.data.title}</a>
+            {post.data.excerpt && (
+              <p class="post-excerpt">{post.data.excerpt}</p>
+            )}
+          </div>
+          <span class="el-tags">
+            {post.data.tags.slice(0, 2).map((t: string) => (
+              <span class="el-cat">{t}</span>
+            ))}
+          </span>
+          <time class="el-date">
+            {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          </time>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="empty-msg">No posts yet — check back soon.</p>
+  )}
 </Page>
 
 <style>
-  .page-title {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+  .el-row {
+    grid-template-columns: 1fr auto auto;
+    align-items: start;
   }
 
-  .page-sub {
-    color: var(--color-muted);
-    margin-bottom: 2.5rem;
-    font-size: 0.9rem;
-  }
-
-  .post-list {
+  .post-main {
     display: flex;
     flex-direction: column;
+    gap: 0.28rem;
+    min-width: 0;
   }
 
-  .empty-state {
+  .post-title-link {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: normal;
+  }
+
+  .post-excerpt {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .empty-msg {
     color: var(--color-muted);
     font-style: italic;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 600px) {
+    .el-row { grid-template-columns: 1fr; }
+    .el-tags, .el-date { order: 2; }
+    .post-excerpt { display: none; }
   }
 </style>
