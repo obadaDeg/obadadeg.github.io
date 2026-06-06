@@ -9,6 +9,8 @@ items:
     slug: lc-quest-dsa-array-ii
   - collection: blog
     slug: lc-quest-dsa-stack
+  - collection: blog
+    slug: lc-quest-dsa-heap
 ---
 
 LeetCode's Quest feature turns DSA practice into a structured progression — units unlock in sequence, each building on the last. This series follows the journey level by level, from the Linear Shoal all the way through to the Strategy Summit.

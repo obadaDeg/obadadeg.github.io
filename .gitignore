@@ -25,6 +25,8 @@ Thumbs.db
 *.swp
 *.tmp
 
+drafts/
+
 # Package manager lock files (keep pnpm only)
 package-lock.json
 yarn.lock

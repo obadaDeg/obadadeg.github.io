@@ -3,6 +3,7 @@ title: "Grid Equalization: Median, Modular Arithmetic, and Quickselect"
 date: 2026-04-29
 tags: ["algorithms", "typescript", "leetcode", "sorting", "quickselect"]
 excerpt: "A walkthrough of LeetCode 2033 — why modular arithmetic determines feasibility, why the median is the optimal target, and what a Quickselect-based solution would look like."
+series: "learn-problem-solving"
 ---
 
 ## The Problem

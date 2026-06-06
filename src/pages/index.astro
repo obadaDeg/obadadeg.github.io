@@ -23,6 +23,12 @@ const recentPosts = allPosts
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 2);
 
+// Recent Certificates
+const allCertificates = await getCollection('certificates', c => !c.data.draft);
+const recentCertificates = allCertificates
+  .sort((a, b) => b.data.issueDate.getTime() - a.data.issueDate.getTime())
+  .slice(0, 2);
+
 // Recent Series — fetch published series with at least one published item
 const allSeries = await getCollection('series', s => !s.data.draft);
 const seriesWithCounts = await Promise.all(
@@ -174,6 +180,29 @@ web app security, penetration testing, CTFs, backend engineering, cloud infra<sp
       <p class="empty-state">Posts coming soon.</p>
     )}
   </section>
+
+  <!-- Recent Certifications -->
+  {recentCertificates.length > 0 && (
+    <section class="home-section section-separator animate-on-scroll">
+      <div class="section-header">
+        <h2 class="section-title">Certifications</h2>
+        <a href={`${base}certificates`} class="section-link">All certificates →</a>
+      </div>
+      <ul class="writeup-list">
+        {recentCertificates.map(cert => (
+          <li class="writeup-item">
+            <a href={`${base}certificates/${cert.slug}`} class="writeup-title">{cert.data.title}</a>
+            <span class="writeup-meta">
+              <span class="writeup-ctf">{cert.data.issuer}</span>
+              <span class="writeup-date">
+                {cert.data.issueDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+              </span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 
   <!-- Recent Series -->
   {recentSeries.length > 0 && (

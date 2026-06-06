@@ -70,6 +70,8 @@ const certificates = defineCollection({
     title: z.string(),
     issuer: z.string(),
     issueDate: z.coerce.date(),
+    category: z.enum(['Security', 'Development', 'DevOps', 'Other']),
+    skills: z.array(z.string()).default([]),
     credentialId: z.string().optional(),
     credentialUrl: z.string().url().optional(),
     assetPath: z.string(),

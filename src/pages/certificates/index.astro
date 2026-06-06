@@ -7,6 +7,27 @@ const allCertificates = await getCollection('certificates', c => !c.data.draft);
 const certificates = allCertificates.sort((a, b) =>
   b.data.issueDate.getTime() - a.data.issueDate.getTime()
 );
+
+// Stats
+const uniqueIssuers = new Set(certificates.map(c => c.data.issuer)).size;
+const dates = certificates.map(c => c.data.issueDate);
+const earliest = new Date(Math.min(...dates.map(d => d.getTime())));
+const latest = new Date(Math.max(...dates.map(d => d.getTime())));
+const fmtMonth = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+const dateRange = earliest.getMonth() === latest.getMonth() && earliest.getFullYear() === latest.getFullYear()
+  ? fmtMonth(earliest)
+  : `${fmtMonth(earliest)} – ${fmtMonth(latest)}`;
+
+// Group by category preserving the defined order
+const CATEGORY_ORDER = ['Security', 'Development', 'DevOps', 'Other'] as const;
+type Category = typeof CATEGORY_ORDER[number];
+
+const grouped = new Map<Category, typeof certificates>();
+for (const cat of CATEGORY_ORDER) grouped.set(cat, []);
+for (const cert of certificates) {
+  grouped.get(cert.data.category as Category)!.push(cert);
+}
+const activeGroups = CATEGORY_ORDER.filter(cat => (grouped.get(cat)?.length ?? 0) > 0);
 ---
 
 <Page title="Certificates">
@@ -16,21 +37,34 @@ const certificates = allCertificates.sort((a, b) =>
       Formal credentials and ongoing education in cybersecurity and software engineering.
     </p>
 
-    <div class="certificates-grid animate-on-scroll">
-      {certificates.map(cert => (
-        <CertificateCard
-          title={cert.data.title}
-          issuer={cert.data.issuer}
-          date={cert.data.issueDate}
-          slug={cert.slug}
-          assetPath={cert.data.assetPath}
-        />
-      ))}
-    </div>
+    {certificates.length > 0 && (
+      <p class="certs-stats animate-on-scroll">
+        {certificates.length} {certificates.length === 1 ? 'certificate' : 'certificates'} · {uniqueIssuers} {uniqueIssuers === 1 ? 'issuer' : 'issuers'} · {dateRange}
+      </p>
+    )}
 
     {certificates.length === 0 && (
       <p class="empty-state">No certificates available yet.</p>
     )}
+
+    {activeGroups.map(cat => (
+      <div class="category-group animate-on-scroll">
+        <h2 class="category-heading">{cat}</h2>
+        <div class="certificates-grid">
+          {grouped.get(cat)!.map(cert => (
+            <CertificateCard
+              title={cert.data.title}
+              issuer={cert.data.issuer}
+              date={cert.data.issueDate}
+              slug={cert.slug}
+              assetPath={cert.data.assetPath}
+              skills={cert.data.skills}
+              credentialUrl={cert.data.credentialUrl}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
   </section>
 </Page>
 
@@ -42,8 +76,31 @@ const certificates = allCertificates.sort((a, b) =>
 
   .page-sub {
     color: var(--color-muted);
-    margin-bottom: 2.5rem;
     font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .certs-stats {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .category-group {
+    margin-bottom: 3rem;
+  }
+
+  .category-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .certificates-grid {

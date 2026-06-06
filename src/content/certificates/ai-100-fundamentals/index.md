@@ -2,6 +2,8 @@
 title: "AI 100 Fundamentals"
 issuer: "TCM Security"
 issueDate: "2025-11-18"
+category: "Security"
+skills: ["AI Fundamentals", "Machine Learning Basics", "AI Ethics", "Large Language Models"]
 assetPath: "./certificate-of-completion-for-ai-100-fundamentals.pdf"
 draft: false
 ---
