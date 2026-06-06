@@ -1,0 +1,1062 @@
+{
+  "D:\\Projects\\obadaDeg\\.agent\\settings.json": {
+    "mtime": 1777509833.746776,
+    "ast_hash": "86220c85af61a9c9f8dbb7b5d33c8d8d",
+    "semantic_hash": "86220c85af61a9c9f8dbb7b5d33c8d8d"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\settings.json": {
+    "mtime": 1780716692.5412908,
+    "ast_hash": "f05a9c096d2c4d3a6cd295e9f7b32d5b",
+    "semantic_hash": "f05a9c096d2c4d3a6cd295e9f7b32d5b"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\bash\\auto-commit.sh": {
+    "mtime": 1776066454.588103,
+    "ast_hash": "039ccedf89df88f5ebe1eac32712a643",
+    "semantic_hash": "039ccedf89df88f5ebe1eac32712a643"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\bash\\create-new-feature.sh": {
+    "mtime": 1776066454.6072037,
+    "ast_hash": "9b973153e23d01c001aa2765ca885363",
+    "semantic_hash": "9b973153e23d01c001aa2765ca885363"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\bash\\git-common.sh": {
+    "mtime": 1776066454.6420884,
+    "ast_hash": "8c0ed104c441798147b32087405a7f0a",
+    "semantic_hash": "8c0ed104c441798147b32087405a7f0a"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\bash\\initialize-repo.sh": {
+    "mtime": 1776066454.6734636,
+    "ast_hash": "74e6c1d493a031b83243ce71777f27ae",
+    "semantic_hash": "74e6c1d493a031b83243ce71777f27ae"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\powershell\\auto-commit.ps1": {
+    "mtime": 1777509834.009073,
+    "ast_hash": "c8dd93a34a19ec690158787e7f9f69b8",
+    "semantic_hash": "c8dd93a34a19ec690158787e7f9f69b8"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\powershell\\create-new-feature.ps1": {
+    "mtime": 1776066454.7215695,
+    "ast_hash": "126d44abaf3f455c3a46287150ffcec7",
+    "semantic_hash": "126d44abaf3f455c3a46287150ffcec7"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\powershell\\git-common.ps1": {
+    "mtime": 1776066454.7358387,
+    "ast_hash": "fbd5d5d5aa3a967c0b4e4dbd57ae32f5",
+    "semantic_hash": "fbd5d5d5aa3a967c0b4e4dbd57ae32f5"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\scripts\\powershell\\initialize-repo.ps1": {
+    "mtime": 1776066454.7496178,
+    "ast_hash": "6668e63007465e34f6d684dd2ef45718",
+    "semantic_hash": "6668e63007465e34f6d684dd2ef45718"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\feature.json": {
+    "mtime": 1778616058.8054166,
+    "ast_hash": "d6eb680c449ece44c0f82464626f8a86",
+    "semantic_hash": "d6eb680c449ece44c0f82464626f8a86"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\init-options.json": {
+    "mtime": 1776066454.7662199,
+    "ast_hash": "316fc28bfd9f02e92558c9068559e624",
+    "semantic_hash": "316fc28bfd9f02e92558c9068559e624"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\integration.json": {
+    "mtime": 1776066454.7730248,
+    "ast_hash": "a380705162a411047c591d2b9143e6b8",
+    "semantic_hash": "a380705162a411047c591d2b9143e6b8"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\integrations\\claude.manifest.json": {
+    "mtime": 1776066454.7847795,
+    "ast_hash": "e8351c84b623d9c5e78cce00123f0173",
+    "semantic_hash": "e8351c84b623d9c5e78cce00123f0173"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\integrations\\claude\\scripts\\update-context.ps1": {
+    "mtime": 1776066454.8024602,
+    "ast_hash": "6b0422e3f7a879ad58b33e76cba04ec3",
+    "semantic_hash": "6b0422e3f7a879ad58b33e76cba04ec3"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\integrations\\claude\\scripts\\update-context.sh": {
+    "mtime": 1776066454.8133013,
+    "ast_hash": "552a7397732d0cf2bac7b40601beeda8",
+    "semantic_hash": "552a7397732d0cf2bac7b40601beeda8"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\integrations\\speckit.manifest.json": {
+    "mtime": 1776066454.8223784,
+    "ast_hash": "f077ff67e64298a94fe7008063348a69",
+    "semantic_hash": "f077ff67e64298a94fe7008063348a69"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\scripts\\bash\\check-prerequisites.sh": {
+    "mtime": 1776066454.8516536,
+    "ast_hash": "c721663f05a10bf0c1dacf674d7349db",
+    "semantic_hash": "c721663f05a10bf0c1dacf674d7349db"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\scripts\\bash\\common.sh": {
+    "mtime": 1776066454.8654041,
+    "ast_hash": "00d19397833df20a520e3b07fdfb905f",
+    "semantic_hash": "00d19397833df20a520e3b07fdfb905f"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\scripts\\bash\\create-new-feature.sh": {
+    "mtime": 1776066454.8818064,
+    "ast_hash": "25cb5a5f116aebd05becf37de1eeefc4",
+    "semantic_hash": "25cb5a5f116aebd05becf37de1eeefc4"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\scripts\\bash\\setup-plan.sh": {
+    "mtime": 1776066454.895325,
+    "ast_hash": "0ffbef68ae7f07a112976cba12a5402a",
+    "semantic_hash": "0ffbef68ae7f07a112976cba12a5402a"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\scripts\\bash\\update-agent-context.sh": {
+    "mtime": 1776066454.9078648,
+    "ast_hash": "f48c9a4588573e64497608e7287b1e05",
+    "semantic_hash": "f48c9a4588573e64497608e7287b1e05"
+  },
+  "D:\\Projects\\obadaDeg\\astro.config.mjs": {
+    "mtime": 1777599310.8601136,
+    "ast_hash": "b95e1dca31c69ba6607dd9e397debba3",
+    "semantic_hash": "b95e1dca31c69ba6607dd9e397debba3"
+  },
+  "D:\\Projects\\obadaDeg\\data.json": {
+    "mtime": 1776066455.0564253,
+    "ast_hash": "b34946d7333802498e71bb319c224583",
+    "semantic_hash": "b34946d7333802498e71bb319c224583"
+  },
+  "D:\\Projects\\obadaDeg\\package.json": {
+    "mtime": 1777599311.0225356,
+    "ast_hash": "71c5b040683ce31658f7073cde317ebc",
+    "semantic_hash": "71c5b040683ce31658f7073cde317ebc"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\BlogCard.astro": {
+    "mtime": 1777430753.776084,
+    "ast_hash": "bfd7e830ef5fb5a0725ea043cdd55be4",
+    "semantic_hash": "bfd7e830ef5fb5a0725ea043cdd55be4"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\CertificateBadge.astro": {
+    "mtime": 1777599311.3315158,
+    "ast_hash": "a424ac158dc6887d4a4f31e9e900e031",
+    "semantic_hash": "a424ac158dc6887d4a4f31e9e900e031"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\CertificateCard.astro": {
+    "mtime": 1778616303.2087023,
+    "ast_hash": "0a8fdf3224149a34698c048d4b900e72",
+    "semantic_hash": "0a8fdf3224149a34698c048d4b900e72"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\CopyButton.astro": {
+    "mtime": 1776066455.2542026,
+    "ast_hash": "03377bbb46f6748c813af58adbd26c8b",
+    "semantic_hash": "03377bbb46f6748c813af58adbd26c8b"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\Footer.astro": {
+    "mtime": 1777428135.9726627,
+    "ast_hash": "d82eaa572998a3100508266f0137ca29",
+    "semantic_hash": "d82eaa572998a3100508266f0137ca29"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\Nav.astro": {
+    "mtime": 1777599311.3462467,
+    "ast_hash": "e8058b8a5d73f76b55598cdeb7ebb5d5",
+    "semantic_hash": "e8058b8a5d73f76b55598cdeb7ebb5d5"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\ProjectCard.astro": {
+    "mtime": 1777521989.169932,
+    "ast_hash": "c95e3275160620830204f1f10bcf4369",
+    "semantic_hash": "c95e3275160620830204f1f10bcf4369"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\SeriesNavigator.astro": {
+    "mtime": 1777521989.1759984,
+    "ast_hash": "3bfca09a332cb59592c692c57e14b393",
+    "semantic_hash": "3bfca09a332cb59592c692c57e14b393"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\TagPill.astro": {
+    "mtime": 1777428136.028731,
+    "ast_hash": "44eb77607c0c45c44d12589e4b471975",
+    "semantic_hash": "44eb77607c0c45c44d12589e4b471975"
+  },
+  "D:\\Projects\\obadaDeg\\src\\components\\WriteupCard.astro": {
+    "mtime": 1777430754.795299,
+    "ast_hash": "473fcf1bcefd25fb6d2f66675ee40dea",
+    "semantic_hash": "473fcf1bcefd25fb6d2f66675ee40dea"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\config.ts": {
+    "mtime": 1778616224.4830322,
+    "ast_hash": "55f784c71ac5a5472004ddfb1ba46e44",
+    "semantic_hash": "55f784c71ac5a5472004ddfb1ba46e44"
+  },
+  "D:\\Projects\\obadaDeg\\src\\env.d.ts": {
+    "mtime": 1776066455.394529,
+    "ast_hash": "a34c63603f2fc704c29af63d4a960109",
+    "semantic_hash": "a34c63603f2fc704c29af63d4a960109"
+  },
+  "D:\\Projects\\obadaDeg\\src\\integrations\\pdf-thumbnail-generator.ts": {
+    "mtime": 1777599311.623097,
+    "ast_hash": "7a2d992a7c8f43097e2f3d0742e58f0f",
+    "semantic_hash": "7a2d992a7c8f43097e2f3d0742e58f0f"
+  },
+  "D:\\Projects\\obadaDeg\\src\\layouts\\Base.astro": {
+    "mtime": 1777428136.0694227,
+    "ast_hash": "d2a1bdb1d3078317bb3f67f718303e42",
+    "semantic_hash": "d2a1bdb1d3078317bb3f67f718303e42"
+  },
+  "D:\\Projects\\obadaDeg\\src\\layouts\\Page.astro": {
+    "mtime": 1776066455.4195824,
+    "ast_hash": "1b674f88e86d80d98c087176291599e2",
+    "semantic_hash": "1b674f88e86d80d98c087176291599e2"
+  },
+  "D:\\Projects\\obadaDeg\\src\\layouts\\Post.astro": {
+    "mtime": 1777599311.6336482,
+    "ast_hash": "205cab1c34f85ac4d221c42a8f3285d4",
+    "semantic_hash": "205cab1c34f85ac4d221c42a8f3285d4"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\404.astro": {
+    "mtime": 1776066455.446832,
+    "ast_hash": "55486407f5e494a8557130572096afc2",
+    "semantic_hash": "55486407f5e494a8557130572096afc2"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\blog\\[...slug].astro": {
+    "mtime": 1777599311.6518629,
+    "ast_hash": "6b83f78f1bdb92bed5bc676d9505d075",
+    "semantic_hash": "6b83f78f1bdb92bed5bc676d9505d075"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\blog\\index.astro": {
+    "mtime": 1777432066.7781806,
+    "ast_hash": "1a3b6b0dd7a076450b04a503a6c6b67d",
+    "semantic_hash": "1a3b6b0dd7a076450b04a503a6c6b67d"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\certificates\\[slug].astro": {
+    "mtime": 1777599311.6645527,
+    "ast_hash": "acfc2d8bda97c47c80cbbecf5e4fc72b",
+    "semantic_hash": "acfc2d8bda97c47c80cbbecf5e4fc72b"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\certificates\\index.astro": {
+    "mtime": 1778616322.872205,
+    "ast_hash": "cce915e87ca6c38abe2b268dfc2a71da",
+    "semantic_hash": "cce915e87ca6c38abe2b268dfc2a71da"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\contact.astro": {
+    "mtime": 1777588832.3135953,
+    "ast_hash": "e421e4806b7a978de6fc3aaffb4fa18f",
+    "semantic_hash": "e421e4806b7a978de6fc3aaffb4fa18f"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\index.astro": {
+    "mtime": 1778616353.7250476,
+    "ast_hash": "5fa7e56b344a9c80446f1a8dd7c79caf",
+    "semantic_hash": "5fa7e56b344a9c80446f1a8dd7c79caf"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\projects\\[slug].astro": {
+    "mtime": 1777599311.6891212,
+    "ast_hash": "a8180502c96ca046f6cc7b1c729d6f5e",
+    "semantic_hash": "a8180502c96ca046f6cc7b1c729d6f5e"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\projects\\index.astro": {
+    "mtime": 1777521989.3430696,
+    "ast_hash": "c9b2459999eed09dc461f790798c2a3c",
+    "semantic_hash": "c9b2459999eed09dc461f790798c2a3c"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\series\\[slug].astro": {
+    "mtime": 1778181985.8917058,
+    "ast_hash": "610f0288d678e4e65b2b4276d7941014",
+    "semantic_hash": "610f0288d678e4e65b2b4276d7941014"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\series\\index.astro": {
+    "mtime": 1778181922.8483388,
+    "ast_hash": "60aa780778eac991e1378483452d110b",
+    "semantic_hash": "60aa780778eac991e1378483452d110b"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\writeups\\[...slug].astro": {
+    "mtime": 1777599311.7012439,
+    "ast_hash": "d4adbb39530aeabb81b3b6a4a5c4026c",
+    "semantic_hash": "d4adbb39530aeabb81b3b6a4a5c4026c"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\writeups\\category\\[category].astro": {
+    "mtime": 1777509834.3253627,
+    "ast_hash": "193efd8feec66d8910c77647b95ff3f4",
+    "semantic_hash": "193efd8feec66d8910c77647b95ff3f4"
+  },
+  "D:\\Projects\\obadaDeg\\src\\pages\\writeups\\index.astro": {
+    "mtime": 1777509834.342774,
+    "ast_hash": "b773644763d96ef9bfa1fb07fb3c6001",
+    "semantic_hash": "b773644763d96ef9bfa1fb07fb3c6001"
+  },
+  "D:\\Projects\\obadaDeg\\tailwind.config.mjs": {
+    "mtime": 1776066455.6421902,
+    "ast_hash": "ad92d79770a7bf125d9da71ecde10d4f",
+    "semantic_hash": "ad92d79770a7bf125d9da71ecde10d4f"
+  },
+  "D:\\Projects\\obadaDeg\\test-pdf.js": {
+    "mtime": 1777599311.7052672,
+    "ast_hash": "f7e27ddff73216a6724a9c186733c33d",
+    "semantic_hash": "f7e27ddff73216a6724a9c186733c33d"
+  },
+  "D:\\Projects\\obadaDeg\\tsconfig.json": {
+    "mtime": 1776066455.649388,
+    "ast_hash": "e8aecda6d190cd30be052af5cc926ec3",
+    "semantic_hash": "e8aecda6d190cd30be052af5cc926ec3"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-analyze\\SKILL.md": {
+    "mtime": 1777509833.765554,
+    "ast_hash": "ce2e149af29efdb7ea642f45e089325d",
+    "semantic_hash": "ce2e149af29efdb7ea642f45e089325d"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-checklist\\SKILL.md": {
+    "mtime": 1777509833.782635,
+    "ast_hash": "dec233b881c84de6bc05de2ea74977f4",
+    "semantic_hash": "dec233b881c84de6bc05de2ea74977f4"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-clarify\\SKILL.md": {
+    "mtime": 1777509833.7981248,
+    "ast_hash": "5426eef98d0a8fb3274754e8cce2a985",
+    "semantic_hash": "5426eef98d0a8fb3274754e8cce2a985"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-constitution\\SKILL.md": {
+    "mtime": 1777509833.8146143,
+    "ast_hash": "3887a165beb33853faa5fdc11b6acf41",
+    "semantic_hash": "3887a165beb33853faa5fdc11b6acf41"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-git-commit\\SKILL.md": {
+    "mtime": 1777509833.831865,
+    "ast_hash": "5e0ed82a671abf6f121c91dcbafdc2da",
+    "semantic_hash": "5e0ed82a671abf6f121c91dcbafdc2da"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-git-feature\\SKILL.md": {
+    "mtime": 1777509833.848156,
+    "ast_hash": "b1c3f48ab652b4652bb87e46dec5f063",
+    "semantic_hash": "b1c3f48ab652b4652bb87e46dec5f063"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-git-initialize\\SKILL.md": {
+    "mtime": 1777509833.8644724,
+    "ast_hash": "c44f676d21c8b940ceefbed483f7474e",
+    "semantic_hash": "c44f676d21c8b940ceefbed483f7474e"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-git-remote\\SKILL.md": {
+    "mtime": 1777509833.879901,
+    "ast_hash": "358b9394acad7c4749feb9233e7ad5a4",
+    "semantic_hash": "358b9394acad7c4749feb9233e7ad5a4"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-git-validate\\SKILL.md": {
+    "mtime": 1777509833.8957205,
+    "ast_hash": "612aed0a6c8bb2d9e5046b59bdb46e8f",
+    "semantic_hash": "612aed0a6c8bb2d9e5046b59bdb46e8f"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-implement\\SKILL.md": {
+    "mtime": 1777509833.912188,
+    "ast_hash": "00f9d124dbb4c74334795044ae283114",
+    "semantic_hash": "00f9d124dbb4c74334795044ae283114"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-plan\\SKILL.md": {
+    "mtime": 1777509833.9300938,
+    "ast_hash": "c89afbb55909eb9196853e2e7bf387ff",
+    "semantic_hash": "c89afbb55909eb9196853e2e7bf387ff"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-specify\\SKILL.md": {
+    "mtime": 1777509833.9457378,
+    "ast_hash": "3dc74e660f74fe838d4f6aba1a4ecdf2",
+    "semantic_hash": "3dc74e660f74fe838d4f6aba1a4ecdf2"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-tasks\\SKILL.md": {
+    "mtime": 1777509833.9611454,
+    "ast_hash": "d6baa8b63185d06adea1f4d9d4fad292",
+    "semantic_hash": "d6baa8b63185d06adea1f4d9d4fad292"
+  },
+  "D:\\Projects\\obadaDeg\\.agent\\workflows\\speckit-taskstoissues\\SKILL.md": {
+    "mtime": 1777509833.977153,
+    "ast_hash": "0bc4649c828dc0b973a8711f79470d85",
+    "semantic_hash": "0bc4649c828dc0b973a8711f79470d85"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\CLAUDE.md": {
+    "mtime": 1780716692.5223882,
+    "ast_hash": "db73b0edd7ffbc61ceac177130730865",
+    "semantic_hash": "db73b0edd7ffbc61ceac177130730865"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\SKILL.md": {
+    "mtime": 1780716692.5104437,
+    "ast_hash": "1acfc5e3ff91c92373909c5c11f55769",
+    "semantic_hash": "1acfc5e3ff91c92373909c5c11f55769"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\add-watch.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "0df0589623217ca38a12bdcabfb42f4c",
+    "semantic_hash": "0df0589623217ca38a12bdcabfb42f4c"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\exports.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "7fb1a81aca17a462db70684a324fcfb0",
+    "semantic_hash": "7fb1a81aca17a462db70684a324fcfb0"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\extraction-spec.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "24808b03abfeaf5f6435bb69c0125b2c",
+    "semantic_hash": "24808b03abfeaf5f6435bb69c0125b2c"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\github-and-merge.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "cde13df085e4c492aeb7ba298a996d0d",
+    "semantic_hash": "cde13df085e4c492aeb7ba298a996d0d"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\hooks.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "3f545db6ce646650bb9de588f5512a27",
+    "semantic_hash": "3f545db6ce646650bb9de588f5512a27"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\query.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "8b40ed8c9e9060fc215219a8fc964091",
+    "semantic_hash": "8b40ed8c9e9060fc215219a8fc964091"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\transcribe.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "70f6aa30d6211f3a2c7e9fc45479f50c",
+    "semantic_hash": "70f6aa30d6211f3a2c7e9fc45479f50c"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\graphify\\references\\update.md": {
+    "mtime": 1780716575.0,
+    "ast_hash": "735932eaa4f0c8fef9566c538ae3e5f8",
+    "semantic_hash": "735932eaa4f0c8fef9566c538ae3e5f8"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-analyze\\SKILL.md": {
+    "mtime": 1776066454.191404,
+    "ast_hash": "ce2e149af29efdb7ea642f45e089325d",
+    "semantic_hash": "ce2e149af29efdb7ea642f45e089325d"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-checklist\\SKILL.md": {
+    "mtime": 1776066454.206872,
+    "ast_hash": "dec233b881c84de6bc05de2ea74977f4",
+    "semantic_hash": "dec233b881c84de6bc05de2ea74977f4"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-clarify\\SKILL.md": {
+    "mtime": 1776066454.219136,
+    "ast_hash": "5426eef98d0a8fb3274754e8cce2a985",
+    "semantic_hash": "5426eef98d0a8fb3274754e8cce2a985"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-constitution\\SKILL.md": {
+    "mtime": 1776066454.2324834,
+    "ast_hash": "3887a165beb33853faa5fdc11b6acf41",
+    "semantic_hash": "3887a165beb33853faa5fdc11b6acf41"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-git-commit\\SKILL.md": {
+    "mtime": 1776066454.2452645,
+    "ast_hash": "5e0ed82a671abf6f121c91dcbafdc2da",
+    "semantic_hash": "5e0ed82a671abf6f121c91dcbafdc2da"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-git-feature\\SKILL.md": {
+    "mtime": 1776066454.2580862,
+    "ast_hash": "b1c3f48ab652b4652bb87e46dec5f063",
+    "semantic_hash": "b1c3f48ab652b4652bb87e46dec5f063"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-git-initialize\\SKILL.md": {
+    "mtime": 1776066454.2690592,
+    "ast_hash": "c44f676d21c8b940ceefbed483f7474e",
+    "semantic_hash": "c44f676d21c8b940ceefbed483f7474e"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-git-remote\\SKILL.md": {
+    "mtime": 1776066454.2811427,
+    "ast_hash": "358b9394acad7c4749feb9233e7ad5a4",
+    "semantic_hash": "358b9394acad7c4749feb9233e7ad5a4"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-git-validate\\SKILL.md": {
+    "mtime": 1776066454.293974,
+    "ast_hash": "612aed0a6c8bb2d9e5046b59bdb46e8f",
+    "semantic_hash": "612aed0a6c8bb2d9e5046b59bdb46e8f"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-implement\\SKILL.md": {
+    "mtime": 1776066454.3079479,
+    "ast_hash": "00f9d124dbb4c74334795044ae283114",
+    "semantic_hash": "00f9d124dbb4c74334795044ae283114"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-plan\\SKILL.md": {
+    "mtime": 1776066454.3209665,
+    "ast_hash": "c89afbb55909eb9196853e2e7bf387ff",
+    "semantic_hash": "c89afbb55909eb9196853e2e7bf387ff"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-specify\\SKILL.md": {
+    "mtime": 1776066454.3334334,
+    "ast_hash": "3dc74e660f74fe838d4f6aba1a4ecdf2",
+    "semantic_hash": "3dc74e660f74fe838d4f6aba1a4ecdf2"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-tasks\\SKILL.md": {
+    "mtime": 1776066454.3462696,
+    "ast_hash": "d6baa8b63185d06adea1f4d9d4fad292",
+    "semantic_hash": "d6baa8b63185d06adea1f4d9d4fad292"
+  },
+  "D:\\Projects\\obadaDeg\\.claude\\skills\\speckit-taskstoissues\\SKILL.md": {
+    "mtime": 1776066454.360295,
+    "ast_hash": "0bc4649c828dc0b973a8711f79470d85",
+    "semantic_hash": "0bc4649c828dc0b973a8711f79470d85"
+  },
+  "D:\\Projects\\obadaDeg\\.github\\workflows\\deploy.yml": {
+    "mtime": 1776066454.3720167,
+    "ast_hash": "7deb7378196e8bf75b3c1586cfd54476",
+    "semantic_hash": "7deb7378196e8bf75b3c1586cfd54476"
+  },
+  "D:\\Projects\\obadaDeg\\.github\\workflows\\sync-readme.yml": {
+    "mtime": 1777590109.2829726,
+    "ast_hash": "8e1edbf3e162c0465b4c0510938bb860",
+    "semantic_hash": "8e1edbf3e162c0465b4c0510938bb860"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions.yml": {
+    "mtime": 1776066454.3906837,
+    "ast_hash": "c26da42753f1cf67e6324440e854dea5",
+    "semantic_hash": "c26da42753f1cf67e6324440e854dea5"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\README.md": {
+    "mtime": 1776066454.413785,
+    "ast_hash": "03c2460bdc0f0edd93a3a4f551c5bec0",
+    "semantic_hash": "03c2460bdc0f0edd93a3a4f551c5bec0"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\commands\\speckit.git.commit.md": {
+    "mtime": 1776066454.4325683,
+    "ast_hash": "072a42b77ae4fc61ee2541fbdb9f191b",
+    "semantic_hash": "072a42b77ae4fc61ee2541fbdb9f191b"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\commands\\speckit.git.feature.md": {
+    "mtime": 1776066454.4510221,
+    "ast_hash": "fea1af399a3daeca4784945fc831489d",
+    "semantic_hash": "fea1af399a3daeca4784945fc831489d"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\commands\\speckit.git.initialize.md": {
+    "mtime": 1776066454.466301,
+    "ast_hash": "3b445c45690f63d74c072d2ad6b24d71",
+    "semantic_hash": "3b445c45690f63d74c072d2ad6b24d71"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\commands\\speckit.git.remote.md": {
+    "mtime": 1776066454.4778,
+    "ast_hash": "eeafceb7d40fa71cd35a39d62842d74e",
+    "semantic_hash": "eeafceb7d40fa71cd35a39d62842d74e"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\commands\\speckit.git.validate.md": {
+    "mtime": 1776066454.4920113,
+    "ast_hash": "4379082fcdc8ff26ae4228596e4b6f3f",
+    "semantic_hash": "4379082fcdc8ff26ae4228596e4b6f3f"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\config-template.yml": {
+    "mtime": 1776066454.5059679,
+    "ast_hash": "2e959d8f99a1aa365700f91f006dde16",
+    "semantic_hash": "2e959d8f99a1aa365700f91f006dde16"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\extension.yml": {
+    "mtime": 1776066454.5216963,
+    "ast_hash": "5d4eebdd419577a3773d375e890404f1",
+    "semantic_hash": "5d4eebdd419577a3773d375e890404f1"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\extensions\\git\\git-config.yml": {
+    "mtime": 1776066454.551535,
+    "ast_hash": "2e959d8f99a1aa365700f91f006dde16",
+    "semantic_hash": "2e959d8f99a1aa365700f91f006dde16"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\memory\\constitution.md": {
+    "mtime": 1776066454.8335035,
+    "ast_hash": "93e92c733bf5430e7ffba97dee55758e",
+    "semantic_hash": "93e92c733bf5430e7ffba97dee55758e"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\templates\\agent-file-template.md": {
+    "mtime": 1776066454.922178,
+    "ast_hash": "b8247a4214e5a2fb2468ad8dcf5fca50",
+    "semantic_hash": "b8247a4214e5a2fb2468ad8dcf5fca50"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\templates\\checklist-template.md": {
+    "mtime": 1776066454.9340632,
+    "ast_hash": "87c4b390cebe71d15364bcd4690a102f",
+    "semantic_hash": "87c4b390cebe71d15364bcd4690a102f"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\templates\\constitution-template.md": {
+    "mtime": 1776066454.9456358,
+    "ast_hash": "dcefb6b60e7cb3db2e966977b6f02f18",
+    "semantic_hash": "dcefb6b60e7cb3db2e966977b6f02f18"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\templates\\plan-template.md": {
+    "mtime": 1776066454.9568422,
+    "ast_hash": "bfd44f9ffc11f0444098f9b04f02e889",
+    "semantic_hash": "bfd44f9ffc11f0444098f9b04f02e889"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\templates\\spec-template.md": {
+    "mtime": 1776066454.9687452,
+    "ast_hash": "130bfc168860e5a6d0cced77ddad7a80",
+    "semantic_hash": "130bfc168860e5a6d0cced77ddad7a80"
+  },
+  "D:\\Projects\\obadaDeg\\.specify\\templates\\tasks-template.md": {
+    "mtime": 1776066454.9821844,
+    "ast_hash": "9bbe5c1fbdbe93da7c522f085de7c0e1",
+    "semantic_hash": "9bbe5c1fbdbe93da7c522f085de7c0e1"
+  },
+  "D:\\Projects\\obadaDeg\\CLAUDE.md": {
+    "mtime": 1780716692.532958,
+    "ast_hash": "81960799330b9cb25ee10a33fa5545e3",
+    "semantic_hash": "81960799330b9cb25ee10a33fa5545e3"
+  },
+  "D:\\Projects\\obadaDeg\\README.md": {
+    "mtime": 1777590803.441543,
+    "ast_hash": "526c1b676f9fd497a0bb01e4cd02481a",
+    "semantic_hash": "526c1b676f9fd497a0bb01e4cd02481a"
+  },
+  "D:\\Projects\\obadaDeg\\docs\\requirements.md": {
+    "mtime": 1776066455.0700562,
+    "ast_hash": "eb3af5bbfeabfb84fb82a7ec8a1d4187",
+    "semantic_hash": "eb3af5bbfeabfb84fb82a7ec8a1d4187"
+  },
+  "D:\\Projects\\obadaDeg\\public\\google950d51512ec43939.html": {
+    "mtime": 1777592280.8381355,
+    "ast_hash": "811b042d8ca9fc9402d69ecbc56f7624",
+    "semantic_hash": "811b042d8ca9fc9402d69ecbc56f7624"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-enhance-certificates\\checklists\\requirements.md": {
+    "mtime": 1778616047.59612,
+    "ast_hash": "fb565b96a2ec50ae94578ec82e6e4dcf",
+    "semantic_hash": "fb565b96a2ec50ae94578ec82e6e4dcf"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-enhance-certificates\\plan.md": {
+    "mtime": 1778616209.9210846,
+    "ast_hash": "854005dc116585a26a1fd71f83a94b34",
+    "semantic_hash": "854005dc116585a26a1fd71f83a94b34"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-enhance-certificates\\spec.md": {
+    "mtime": 1778616039.5868084,
+    "ast_hash": "fb4456360b155b88fc7aa1a95ce73bce",
+    "semantic_hash": "fb4456360b155b88fc7aa1a95ce73bce"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\checklists\\requirements.md": {
+    "mtime": 1776066455.1298475,
+    "ast_hash": "2cbbdce578313ee9c243cd6578dbc1bd",
+    "semantic_hash": "2cbbdce578313ee9c243cd6578dbc1bd"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\contracts\\content-schema.md": {
+    "mtime": 1776066455.1473906,
+    "ast_hash": "d83d17b60124aa525f2e59e5b838d78f",
+    "semantic_hash": "d83d17b60124aa525f2e59e5b838d78f"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\contracts\\routes.md": {
+    "mtime": 1776066455.1595864,
+    "ast_hash": "b421af6f202dfbaf56a0070e6c08f622",
+    "semantic_hash": "b421af6f202dfbaf56a0070e6c08f622"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\data-model.md": {
+    "mtime": 1776066455.1681101,
+    "ast_hash": "a26fb1cc4e91aa8cab6919b937d47b7e",
+    "semantic_hash": "a26fb1cc4e91aa8cab6919b937d47b7e"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\plan.md": {
+    "mtime": 1776066455.1776931,
+    "ast_hash": "e45f9c4d1a1e4cb0bba41022ceb4cc67",
+    "semantic_hash": "e45f9c4d1a1e4cb0bba41022ceb4cc67"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\quickstart.md": {
+    "mtime": 1776066455.1889317,
+    "ast_hash": "809cf752ebf28ef37ac5aee2e4559e6a",
+    "semantic_hash": "809cf752ebf28ef37ac5aee2e4559e6a"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\research.md": {
+    "mtime": 1776066455.2005882,
+    "ast_hash": "48ce9bf67a26798052bac7011aee6789",
+    "semantic_hash": "48ce9bf67a26798052bac7011aee6789"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\spec.md": {
+    "mtime": 1776066455.2127972,
+    "ast_hash": "e00c08fc4b276696a7152545b2ebff40",
+    "semantic_hash": "e00c08fc4b276696a7152545b2ebff40"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\001-portfolio-site\\tasks.md": {
+    "mtime": 1776066455.2248025,
+    "ast_hash": "169f3747c4ec9d09f4d004285150e986",
+    "semantic_hash": "169f3747c4ec9d09f4d004285150e986"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\002-redesign-web-app\\checklists\\requirements.md": {
+    "mtime": 1777428135.8469303,
+    "ast_hash": "e61c086982e27e8ff2684664b164dfc8",
+    "semantic_hash": "e61c086982e27e8ff2684664b164dfc8"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\002-redesign-web-app\\plan.md": {
+    "mtime": 1777428135.8626113,
+    "ast_hash": "cd61e9c4a3833ca9cb565accaea1590c",
+    "semantic_hash": "cd61e9c4a3833ca9cb565accaea1590c"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\002-redesign-web-app\\quickstart.md": {
+    "mtime": 1777428135.8778946,
+    "ast_hash": "2190c5e013c9fbeb048b20736313ee96",
+    "semantic_hash": "2190c5e013c9fbeb048b20736313ee96"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\002-redesign-web-app\\research.md": {
+    "mtime": 1777428135.891127,
+    "ast_hash": "7c163b42437a6e5885ece4817904e827",
+    "semantic_hash": "7c163b42437a6e5885ece4817904e827"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\002-redesign-web-app\\spec.md": {
+    "mtime": 1777428135.9058874,
+    "ast_hash": "f616b9edbdcbf8ea27e6c227e7a4b33a",
+    "semantic_hash": "f616b9edbdcbf8ea27e6c227e7a4b33a"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\002-redesign-web-app\\tasks.md": {
+    "mtime": 1777428135.9217834,
+    "ast_hash": "b7bf6045df9c47c59e7f536e34630dde",
+    "semantic_hash": "b7bf6045df9c47c59e7f536e34630dde"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\003-media-in-writeups\\checklists\\requirements.md": {
+    "mtime": 1777509834.098976,
+    "ast_hash": "3a57e9b5695e83db5237baa8bc2c89e4",
+    "semantic_hash": "3a57e9b5695e83db5237baa8bc2c89e4"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\003-media-in-writeups\\data-model.md": {
+    "mtime": 1777509834.111179,
+    "ast_hash": "a88b511b435a8e0ee4d5148abedf6861",
+    "semantic_hash": "a88b511b435a8e0ee4d5148abedf6861"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\003-media-in-writeups\\plan.md": {
+    "mtime": 1777509834.1227617,
+    "ast_hash": "c17e996a25c5be1341430e242d010ce9",
+    "semantic_hash": "c17e996a25c5be1341430e242d010ce9"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\003-media-in-writeups\\research.md": {
+    "mtime": 1777509834.1355155,
+    "ast_hash": "7a2e94edaf08da82f77588c49cc672a3",
+    "semantic_hash": "7a2e94edaf08da82f77588c49cc672a3"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\003-media-in-writeups\\spec.md": {
+    "mtime": 1777509834.1481133,
+    "ast_hash": "72e73a9b99f7f3eb434bc5d5b98d1aa0",
+    "semantic_hash": "72e73a9b99f7f3eb434bc5d5b98d1aa0"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\003-media-in-writeups\\tasks.md": {
+    "mtime": 1777509834.1618743,
+    "ast_hash": "c449815174bb0e29b0e53a13fc9672b7",
+    "semantic_hash": "c449815174bb0e29b0e53a13fc9672b7"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\004-post-series-playlists\\checklists\\requirements.md": {
+    "mtime": 1777521989.1146278,
+    "ast_hash": "8927aa5d7ee93c45c6847d3389ec8fa5",
+    "semantic_hash": "8927aa5d7ee93c45c6847d3389ec8fa5"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\004-post-series-playlists\\data-model.md": {
+    "mtime": 1777521989.1204493,
+    "ast_hash": "afbfe80aca11b9ad73ea99bf9b058cca",
+    "semantic_hash": "afbfe80aca11b9ad73ea99bf9b058cca"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\004-post-series-playlists\\plan.md": {
+    "mtime": 1777521989.1262565,
+    "ast_hash": "e0dcefa5c511d69a220445a6284aeba0",
+    "semantic_hash": "e0dcefa5c511d69a220445a6284aeba0"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\004-post-series-playlists\\research.md": {
+    "mtime": 1777521989.1323972,
+    "ast_hash": "84683e4f1fd41cc12fa8eb36768a3b44",
+    "semantic_hash": "84683e4f1fd41cc12fa8eb36768a3b44"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\004-post-series-playlists\\spec.md": {
+    "mtime": 1777521989.1396298,
+    "ast_hash": "cc09eaf02eab12000f3b1a4f85f32532",
+    "semantic_hash": "cc09eaf02eab12000f3b1a4f85f32532"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\004-post-series-playlists\\tasks.md": {
+    "mtime": 1777521989.1477122,
+    "ast_hash": "2c6192d2f81eaf31abac107ed123abe7",
+    "semantic_hash": "2c6192d2f81eaf31abac107ed123abe7"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\005-certificates-integration\\checklists\\requirements.md": {
+    "mtime": 1777599311.292577,
+    "ast_hash": "01121678b7c1ecbf8f3d34c005daceb6",
+    "semantic_hash": "01121678b7c1ecbf8f3d34c005daceb6"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\005-certificates-integration\\data-model.md": {
+    "mtime": 1777599311.2984836,
+    "ast_hash": "d490fa25b7b4ca72885489da6006da09",
+    "semantic_hash": "d490fa25b7b4ca72885489da6006da09"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\005-certificates-integration\\plan.md": {
+    "mtime": 1777599311.304592,
+    "ast_hash": "44f0ac6f55ed49f450af0b27317b0a3b",
+    "semantic_hash": "44f0ac6f55ed49f450af0b27317b0a3b"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\005-certificates-integration\\research.md": {
+    "mtime": 1777599311.30994,
+    "ast_hash": "e2e7316037d45dc607283328dc610bba",
+    "semantic_hash": "e2e7316037d45dc607283328dc610bba"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\005-certificates-integration\\spec.md": {
+    "mtime": 1777599311.3156123,
+    "ast_hash": "b7d233f08e533421da0f0624732e6590",
+    "semantic_hash": "b7d233f08e533421da0f0624732e6590"
+  },
+  "D:\\Projects\\obadaDeg\\specs\\005-certificates-integration\\tasks.md": {
+    "mtime": 1777599311.3220096,
+    "ast_hash": "f222d6c4821000bdee26fbe23a59e809",
+    "semantic_hash": "f222d6c4821000bdee26fbe23a59e809"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\_template\\index.md": {
+    "mtime": 1777521989.1965187,
+    "ast_hash": "20bfa19e1407d920f0c036fe40134d94",
+    "semantic_hash": "20bfa19e1407d920f0c036fe40134d94"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\backend-dev-hacking-advantage.md": {
+    "mtime": 1780711836.1898725,
+    "ast_hash": "cdbba660f4d3a6916a927b73971a3d6e",
+    "semantic_hash": "cdbba660f4d3a6916a927b73971a3d6e"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\example-post.md": {
+    "mtime": 1777432134.834424,
+    "ast_hash": "77968a02af560ea3b5cad17c84dcb6cc",
+    "semantic_hash": "77968a02af560ea3b5cad17c84dcb6cc"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\grid-equalization-quickselect.md": {
+    "mtime": 1780710715.470157,
+    "ast_hash": "f0455f1db46333adff84dd104a3e47ce",
+    "semantic_hash": "f0455f1db46333adff84dd104a3e47ce"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\lc-quest-dsa-array-i.md": {
+    "mtime": 1777521989.2044501,
+    "ast_hash": "bd51972acfa46c1770180eeb8b477ebe",
+    "semantic_hash": "bd51972acfa46c1770180eeb8b477ebe"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\lc-quest-dsa-array-ii.md": {
+    "mtime": 1777521989.2112603,
+    "ast_hash": "5ae281321e241660c667d32994217b07",
+    "semantic_hash": "5ae281321e241660c667d32994217b07"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\lc-quest-dsa-heap.md": {
+    "mtime": 1780711581.086945,
+    "ast_hash": "c8d343b3169a3e7472b195dce667530b",
+    "semantic_hash": "c8d343b3169a3e7472b195dce667530b"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\lc-quest-dsa-monotonic-stack.md": {
+    "mtime": 1780712902.1701877,
+    "ast_hash": "d597269f1ea7861f1adb19987e5fbe23",
+    "semantic_hash": "d597269f1ea7861f1adb19987e5fbe23"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\lc-quest-dsa-queue.md": {
+    "mtime": 1780712902.1701877,
+    "ast_hash": "d597269f1ea7861f1adb19987e5fbe23",
+    "semantic_hash": "d597269f1ea7861f1adb19987e5fbe23"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\lc-quest-dsa-stack.md": {
+    "mtime": 1777521989.2188666,
+    "ast_hash": "d49ad9b2786c18b9590848a5b0bf4d15",
+    "semantic_hash": "d49ad9b2786c18b9590848a5b0bf4d15"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\what-is-api-hacking.md": {
+    "mtime": 1777685493.0493975,
+    "ast_hash": "5db66139d62f20773960816becc9b577",
+    "semantic_hash": "5db66139d62f20773960816becc9b577"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\_template.md": {
+    "mtime": 1777599311.3575366,
+    "ast_hash": "b5246eac9c0814e1defcbf59c09ef50a",
+    "semantic_hash": "b5246eac9c0814e1defcbf59c09ef50a"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\ai-100-fundamentals\\index.md": {
+    "mtime": 1778616246.3630867,
+    "ast_hash": "99516d4e1a58b6e48124824c85bffe07",
+    "semantic_hash": "99516d4e1a58b6e48124824c85bffe07"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\ai-hacking-101\\index.md": {
+    "mtime": 1778616254.9067,
+    "ast_hash": "d2f173c296b512be5ad04323fcfda41b",
+    "semantic_hash": "d2f173c296b512be5ad04323fcfda41b"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\git-github-practical-guide\\index.md": {
+    "mtime": 1778616263.6647832,
+    "ast_hash": "f3ad94e9e58a98b427882645e63d44cf",
+    "semantic_hash": "f3ad94e9e58a98b427882645e63d44cf"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\practical-web-hacking\\index.md": {
+    "mtime": 1778616274.0055647,
+    "ast_hash": "4bf2f7d547fa0545aba57257fa300e55",
+    "semantic_hash": "4bf2f7d547fa0545aba57257fa300e55"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\titan-shield-web-assessor\\index.md": {
+    "mtime": 1778616282.5081425,
+    "ast_hash": "1927fb07fcede6d236478372f9206f7c",
+    "semantic_hash": "1927fb07fcede6d236478372f9206f7c"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\projects\\blog-aggregator.md": {
+    "mtime": 1777589088.1560786,
+    "ast_hash": "109757ef6850f57a7c34a2f46ea29aff",
+    "semantic_hash": "109757ef6850f57a7c34a2f46ea29aff"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\projects\\chirpy-api.md": {
+    "mtime": 1777589099.4673119,
+    "ast_hash": "68e4413489d9c6ac7ebbcca5cc93158d",
+    "semantic_hash": "68e4413489d9c6ac7ebbcca5cc93158d"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\projects\\pakistan-tax-calculator.md": {
+    "mtime": 1777589076.934663,
+    "ast_hash": "86eedf31dc643435f91efff566f839a6",
+    "semantic_hash": "86eedf31dc643435f91efff566f839a6"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\projects\\pipeline-orchestrator.md": {
+    "mtime": 1777521989.2404048,
+    "ast_hash": "6c8c712fc1deeb5ba9a2111e6a9d428d",
+    "semantic_hash": "6c8c712fc1deeb5ba9a2111e6a9d428d"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\series\\_template.md": {
+    "mtime": 1777521989.2513905,
+    "ast_hash": "f7045dd6ded3baf210eb87d8233e5fd9",
+    "semantic_hash": "f7045dd6ded3baf210eb87d8233e5fd9"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\series\\backend-journey-bootdev.md": {
+    "mtime": 1780712741.7900884,
+    "ast_hash": "474c1cdceeeef04ad305a4d52e4eaf37",
+    "semantic_hash": "474c1cdceeeef04ad305a4d52e4eaf37"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\series\\example-series.md": {
+    "mtime": 1777521989.26078,
+    "ast_hash": "eecf0e192e4806b39223acf2a4accee6",
+    "semantic_hash": "eecf0e192e4806b39223acf2a4accee6"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\series\\learn-problem-solving.md": {
+    "mtime": 1780711171.8004866,
+    "ast_hash": "5bfbe73861187b6ad792adb4c03f7536",
+    "semantic_hash": "5bfbe73861187b6ad792adb4c03f7536"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\series\\leetcode-quest-dsa.md": {
+    "mtime": 1780712956.8619173,
+    "ast_hash": "ee7b07d065462a98f94dd49d837e09a0",
+    "semantic_hash": "ee7b07d065462a98f94dd49d837e09a0"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\series\\practical-api-hacking.md": {
+    "mtime": 1780710708.413813,
+    "ast_hash": "12ede20b75c15b8fcda4ba981671b4ab",
+    "semantic_hash": "12ede20b75c15b8fcda4ba981671b4ab"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\series\\system-design-learning-journey.md": {
+    "mtime": 1780710700.9459202,
+    "ast_hash": "f638a89dd7297d60d47e5ea2b0ce8c0d",
+    "semantic_hash": "f638a89dd7297d60d47e5ea2b0ce8c0d"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\writeups\\_template\\index.md": {
+    "mtime": 1777521989.2890782,
+    "ast_hash": "e7a9e68b683e94aaf7d46536661dffd9",
+    "semantic_hash": "e7a9e68b683e94aaf7d46536661dffd9"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\writeups\\c4ptur3-th3-fl4g\\index.md": {
+    "mtime": 1780715384.2237012,
+    "ast_hash": "4b8ea8c22f83c7bf00f273db5c4e3a28",
+    "semantic_hash": "4b8ea8c22f83c7bf00f273db5c4e3a28"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\writeups\\crack-the-hash\\index.md": {
+    "mtime": 1780715541.4391317,
+    "ast_hash": "14319c73e8f3f72fb46df5285274eaac",
+    "semantic_hash": "14319c73e8f3f72fb46df5285274eaac"
+  },
+  "D:\\Projects\\obadaDeg\\docs\\MyResume\\Obada Daghlas - CybersecurityEngineer.pdf": {
+    "mtime": 1775771889.7033496,
+    "ast_hash": "640d9e724612ee4771e7ef4436ed65fd",
+    "semantic_hash": "640d9e724612ee4771e7ef4436ed65fd"
+  },
+  "D:\\Projects\\obadaDeg\\docs\\certificates\\Titan-sheild-certified-web-assessor.pdf": {
+    "mtime": 1777599310.875621,
+    "ast_hash": "2b302205be162bd96b7d9e2c137c70f8",
+    "semantic_hash": "2b302205be162bd96b7d9e2c137c70f8"
+  },
+  "D:\\Projects\\obadaDeg\\docs\\certificates\\certificate-of-completion-for-ai-100-fundamentals.pdf": {
+    "mtime": 1777599310.8831763,
+    "ast_hash": "13c3fe9f7353ecddf10ada5a1cf8dcd8",
+    "semantic_hash": "13c3fe9f7353ecddf10ada5a1cf8dcd8"
+  },
+  "D:\\Projects\\obadaDeg\\docs\\certificates\\certificate-of-completion-for-ai-hacking-101.pdf": {
+    "mtime": 1777599310.8964944,
+    "ast_hash": "9ce42bea12d94242ced9ea62aa653b42",
+    "semantic_hash": "9ce42bea12d94242ced9ea62aa653b42"
+  },
+  "D:\\Projects\\obadaDeg\\docs\\certificates\\certificate-of-completion-for-git-github-the-practical-guide.pdf": {
+    "mtime": 1777599310.946267,
+    "ast_hash": "9d8350af16c281b7aa6d9b4b9b805633",
+    "semantic_hash": "9d8350af16c281b7aa6d9b4b9b805633"
+  },
+  "D:\\Projects\\obadaDeg\\docs\\certificates\\certificate-of-completion-for-practical-web-hacking.pdf": {
+    "mtime": 1777599311.016484,
+    "ast_hash": "fb79e3eef07c27f2dc66c4fda7e39973",
+    "semantic_hash": "fb79e3eef07c27f2dc66c4fda7e39973"
+  },
+  "D:\\Projects\\obadaDeg\\public\\Obada-Daghlas-CybersecurityEngineer.pdf": {
+    "mtime": 1775771889.7033496,
+    "ast_hash": "640d9e724612ee4771e7ef4436ed65fd",
+    "semantic_hash": "640d9e724612ee4771e7ef4436ed65fd"
+  },
+  "D:\\Projects\\obadaDeg\\public\\certificates\\Titan-sheild-certified-web-assessor.pdf": {
+    "mtime": 1777599311.5960193,
+    "ast_hash": "2b302205be162bd96b7d9e2c137c70f8",
+    "semantic_hash": "2b302205be162bd96b7d9e2c137c70f8"
+  },
+  "D:\\Projects\\obadaDeg\\public\\certificates\\certificate-of-completion-for-ai-100-fundamentals.pdf": {
+    "mtime": 1777599311.3702624,
+    "ast_hash": "13c3fe9f7353ecddf10ada5a1cf8dcd8",
+    "semantic_hash": "13c3fe9f7353ecddf10ada5a1cf8dcd8"
+  },
+  "D:\\Projects\\obadaDeg\\public\\certificates\\certificate-of-completion-for-ai-hacking-101.pdf": {
+    "mtime": 1777599311.396418,
+    "ast_hash": "9ce42bea12d94242ced9ea62aa653b42",
+    "semantic_hash": "9ce42bea12d94242ced9ea62aa653b42"
+  },
+  "D:\\Projects\\obadaDeg\\public\\certificates\\certificate-of-completion-for-git-github-the-practical-guide.pdf": {
+    "mtime": 1777599311.465773,
+    "ast_hash": "9d8350af16c281b7aa6d9b4b9b805633",
+    "semantic_hash": "9d8350af16c281b7aa6d9b4b9b805633"
+  },
+  "D:\\Projects\\obadaDeg\\public\\certificates\\certificate-of-completion-for-practical-web-hacking.pdf": {
+    "mtime": 1777599311.5604722,
+    "ast_hash": "fb79e3eef07c27f2dc66c4fda7e39973",
+    "semantic_hash": "fb79e3eef07c27f2dc66c4fda7e39973"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\ai-100-fundamentals\\certificate-of-completion-for-ai-100-fundamentals.pdf": {
+    "mtime": 1777599311.3702624,
+    "ast_hash": "13c3fe9f7353ecddf10ada5a1cf8dcd8",
+    "semantic_hash": "13c3fe9f7353ecddf10ada5a1cf8dcd8"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\ai-hacking-101\\certificate-of-completion-for-ai-hacking-101.pdf": {
+    "mtime": 1777599311.396418,
+    "ast_hash": "9ce42bea12d94242ced9ea62aa653b42",
+    "semantic_hash": "9ce42bea12d94242ced9ea62aa653b42"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\git-github-practical-guide\\certificate-of-completion-for-git-github-the-practical-guide.pdf": {
+    "mtime": 1777599311.465773,
+    "ast_hash": "9d8350af16c281b7aa6d9b4b9b805633",
+    "semantic_hash": "9d8350af16c281b7aa6d9b4b9b805633"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\practical-web-hacking\\certificate-of-completion-for-practical-web-hacking.pdf": {
+    "mtime": 1777599311.5604722,
+    "ast_hash": "fb79e3eef07c27f2dc66c4fda7e39973",
+    "semantic_hash": "fb79e3eef07c27f2dc66c4fda7e39973"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\certificates\\titan-shield-web-assessor\\Titan-sheild-certified-web-assessor.pdf": {
+    "mtime": 1777599311.5960193,
+    "ast_hash": "2b302205be162bd96b7d9e2c137c70f8",
+    "semantic_hash": "2b302205be162bd96b7d9e2c137c70f8"
+  },
+  "D:\\Projects\\obadaDeg\\public\\favicon.svg": {
+    "mtime": 1776066455.1053815,
+    "ast_hash": "4a673ba7ff2914706b82300749382d4b",
+    "semantic_hash": "4a673ba7ff2914706b82300749382d4b"
+  },
+  "D:\\Projects\\obadaDeg\\public\\images\\certificates\\Titan-sheild-certified-web-assessor.png": {
+    "mtime": 1777599311.2230701,
+    "ast_hash": "b218708b013e4d36763d10d5b7b2ce99",
+    "semantic_hash": "b218708b013e4d36763d10d5b7b2ce99"
+  },
+  "D:\\Projects\\obadaDeg\\public\\images\\certificates\\certificate-of-completion-for-ai-100-fundamentals.png": {
+    "mtime": 1777599311.232028,
+    "ast_hash": "54a6c6a0f33f66c6b021f63b7e4d0ed7",
+    "semantic_hash": "54a6c6a0f33f66c6b021f63b7e4d0ed7"
+  },
+  "D:\\Projects\\obadaDeg\\public\\images\\certificates\\certificate-of-completion-for-ai-hacking-101.png": {
+    "mtime": 1777599311.2467687,
+    "ast_hash": "50c83991f78699db7af1df8401205391",
+    "semantic_hash": "50c83991f78699db7af1df8401205391"
+  },
+  "D:\\Projects\\obadaDeg\\public\\images\\certificates\\certificate-of-completion-for-git-github-the-practical-guide.png": {
+    "mtime": 1777599311.2606664,
+    "ast_hash": "e80a3fb1e9d3a34265b3fa83bde11299",
+    "semantic_hash": "e80a3fb1e9d3a34265b3fa83bde11299"
+  },
+  "D:\\Projects\\obadaDeg\\public\\images\\certificates\\certificate-of-completion-for-practical-web-hacking.png": {
+    "mtime": 1777599311.2781146,
+    "ast_hash": "399a3444fd25ee0b164bc0123d567e33",
+    "semantic_hash": "399a3444fd25ee0b164bc0123d567e33"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\blog\\_template\\images\\diagram.png": {
+    "mtime": 1777509834.198286,
+    "ast_hash": "c1b2795bbebfc4e77bd0b7fe671b92df",
+    "semantic_hash": "c1b2795bbebfc4e77bd0b7fe671b92df"
+  },
+  "D:\\Projects\\obadaDeg\\src\\content\\writeups\\_template\\images\\diagram.png": {
+    "mtime": 1777509834.251116,
+    "ast_hash": "c1b2795bbebfc4e77bd0b7fe671b92df",
+    "semantic_hash": "c1b2795bbebfc4e77bd0b7fe671b92df"
+  },
+  "D:\\Projects\\obadaDeg\\public\\videos\\sample.mp4": {
+    "mtime": 1777509834.0788887,
+    "ast_hash": "198918f40ecc7cab0fc4231adaf67c96",
+    "semantic_hash": "198918f40ecc7cab0fc4231adaf67c96"
+  }
+}
